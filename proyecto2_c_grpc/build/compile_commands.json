@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/betocr23/proyecto2_c_grpc/build",
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/home/betocr23/proyecto2_c_grpc/build -isystem /home/betocr23/grpc/include  -o CMakeFiles/protolib.dir/Cliente_Proto.pb.cc.o -c /home/betocr23/proyecto2_c_grpc/build/Cliente_Proto.pb.cc",
+  "file": "/home/betocr23/proyecto2_c_grpc/build/Cliente_Proto.pb.cc"
+},
+{
+  "directory": "/home/betocr23/proyecto2_c_grpc/build",
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/home/betocr23/proyecto2_c_grpc/build -isystem /home/betocr23/grpc/include  -o CMakeFiles/protolib.dir/Cliente_Proto.grpc.pb.cc.o -c /home/betocr23/proyecto2_c_grpc/build/Cliente_Proto.grpc.pb.cc",
+  "file": "/home/betocr23/proyecto2_c_grpc/build/Cliente_Proto.grpc.pb.cc"
+},
+{
+  "directory": "/home/betocr23/proyecto2_c_grpc/build",
+  "command": "/usr/bin/c++ -DCARES_STATICLIB -I/home/betocr23/proyecto2_c_grpc/build -isystem /home/betocr23/grpc/include  -o CMakeFiles/cliente.dir/Cliente.cpp.o -c /home/betocr23/proyecto2_c_grpc/Cliente.cpp",
+  "file": "/home/betocr23/proyecto2_c_grpc/Cliente.cpp"
+}
+]
