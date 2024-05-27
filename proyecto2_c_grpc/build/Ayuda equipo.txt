@@ -1,0 +1,1 @@
+El archivo Cliente sera ejecutable, ejecutar ./Cliente en linux pasando como parametro la dir ip(falta implementacion)
