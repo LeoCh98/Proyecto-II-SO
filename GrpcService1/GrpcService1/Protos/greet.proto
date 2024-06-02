@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService1";
+
+
+
+service ClienteServicios {
+    rpc enviarMensaje(Mensaje) returns (estadoMSJ);
+    rpc recibirMSJServer(solicitudMSJ) returns (Mensaje);
+}
+
+
+
+
+message Mensaje {
+    int32 tema = 1;
+    string contenido = 2;
+}
+
+message estadoMSJ {
+    bool recibido = 1;
+}
+
+message Vacio {}
+
+message solicitudMSJ {
+    int32 tema = 1;
+}
+
+
