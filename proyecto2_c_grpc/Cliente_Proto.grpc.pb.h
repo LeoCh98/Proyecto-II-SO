@@ -42,6 +42,13 @@ class ClienteServicios final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>> PrepareAsyncenviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>>(PrepareAsyncenviarMensajeRaw(context, request, cq));
     }
+    virtual ::grpc::Status publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::Cliente_Productor::estadoMSJ* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>> AsyncpublicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>>(AsyncpublicarMensajeRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>> PrepareAsyncpublicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>>(PrepareAsyncpublicarMensajeRaw(context, request, cq));
+    }
     virtual ::grpc::Status recibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::Cliente_Productor::Mensaje* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::Mensaje>> AsyncrecibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::Mensaje>>(AsyncrecibirMSJServerRaw(context, request, cq));
@@ -54,6 +61,8 @@ class ClienteServicios final {
       virtual ~async_interface() {}
       virtual void enviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, std::function<void(::grpc::Status)>) = 0;
       virtual void enviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void recibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ* request, ::Cliente_Productor::Mensaje* response, std::function<void(::grpc::Status)>) = 0;
       virtual void recibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ* request, ::Cliente_Productor::Mensaje* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
@@ -63,6 +72,8 @@ class ClienteServicios final {
    private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>* AsyncenviarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>* PrepareAsyncenviarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>* AsyncpublicarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::estadoMSJ>* PrepareAsyncpublicarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::Mensaje>* AsyncrecibirMSJServerRaw(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Cliente_Productor::Mensaje>* PrepareAsyncrecibirMSJServerRaw(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::grpc::CompletionQueue* cq) = 0;
   };
@@ -76,6 +87,13 @@ class ClienteServicios final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>> PrepareAsyncenviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>>(PrepareAsyncenviarMensajeRaw(context, request, cq));
     }
+    ::grpc::Status publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::Cliente_Productor::estadoMSJ* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>> AsyncpublicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>>(AsyncpublicarMensajeRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>> PrepareAsyncpublicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>>(PrepareAsyncpublicarMensajeRaw(context, request, cq));
+    }
     ::grpc::Status recibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::Cliente_Productor::Mensaje* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::Mensaje>> AsyncrecibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::Mensaje>>(AsyncrecibirMSJServerRaw(context, request, cq));
@@ -88,6 +106,8 @@ class ClienteServicios final {
      public:
       void enviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, std::function<void(::grpc::Status)>) override;
       void enviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, std::function<void(::grpc::Status)>) override;
+      void publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, ::grpc::ClientUnaryReactor* reactor) override;
       void recibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ* request, ::Cliente_Productor::Mensaje* response, std::function<void(::grpc::Status)>) override;
       void recibirMSJServer(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ* request, ::Cliente_Productor::Mensaje* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
@@ -103,9 +123,12 @@ class ClienteServicios final {
     class async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* AsyncenviarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* PrepareAsyncenviarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* AsyncpublicarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* PrepareAsyncpublicarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::Mensaje>* AsyncrecibirMSJServerRaw(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::Mensaje>* PrepareAsyncrecibirMSJServerRaw(::grpc::ClientContext* context, const ::Cliente_Productor::solicitudMSJ& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_enviarMensaje_;
+    const ::grpc::internal::RpcMethod rpcmethod_publicarMensaje_;
     const ::grpc::internal::RpcMethod rpcmethod_recibirMSJServer_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -115,6 +138,7 @@ class ClienteServicios final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status enviarMensaje(::grpc::ServerContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response);
+    virtual ::grpc::Status publicarMensaje(::grpc::ServerContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response);
     virtual ::grpc::Status recibirMSJServer(::grpc::ServerContext* context, const ::Cliente_Productor::solicitudMSJ* request, ::Cliente_Productor::Mensaje* response);
   };
   template <class BaseClass>
@@ -138,12 +162,32 @@ class ClienteServicios final {
     }
   };
   template <class BaseClass>
+  class WithAsyncMethod_publicarMensaje : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_publicarMensaje() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_publicarMensaje() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status publicarMensaje(::grpc::ServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestpublicarMensaje(::grpc::ServerContext* context, ::Cliente_Productor::Mensaje* request, ::grpc::ServerAsyncResponseWriter< ::Cliente_Productor::estadoMSJ>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithAsyncMethod_recibirMSJServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_recibirMSJServer() {
-      ::grpc::Service::MarkMethodAsync(1);
+      ::grpc::Service::MarkMethodAsync(2);
     }
     ~WithAsyncMethod_recibirMSJServer() override {
       BaseClassMustBeDerivedFromService(this);
@@ -154,10 +198,10 @@ class ClienteServicios final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestrecibirMSJServer(::grpc::ServerContext* context, ::Cliente_Productor::solicitudMSJ* request, ::grpc::ServerAsyncResponseWriter< ::Cliente_Productor::Mensaje>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_enviarMensaje<WithAsyncMethod_recibirMSJServer<Service > > AsyncService;
+  typedef WithAsyncMethod_enviarMensaje<WithAsyncMethod_publicarMensaje<WithAsyncMethod_recibirMSJServer<Service > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_enviarMensaje : public BaseClass {
    private:
@@ -186,18 +230,45 @@ class ClienteServicios final {
       ::grpc::CallbackServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
+  class WithCallbackMethod_publicarMensaje : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_publicarMensaje() {
+      ::grpc::Service::MarkMethodCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response) { return this->publicarMensaje(context, request, response); }));}
+    void SetMessageAllocatorFor_publicarMensaje(
+        ::grpc::MessageAllocator< ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_publicarMensaje() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status publicarMensaje(::grpc::ServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* publicarMensaje(
+      ::grpc::CallbackServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
   class WithCallbackMethod_recibirMSJServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_recibirMSJServer() {
-      ::grpc::Service::MarkMethodCallback(1,
+      ::grpc::Service::MarkMethodCallback(2,
           new ::grpc::internal::CallbackUnaryHandler< ::Cliente_Productor::solicitudMSJ, ::Cliente_Productor::Mensaje>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::Cliente_Productor::solicitudMSJ* request, ::Cliente_Productor::Mensaje* response) { return this->recibirMSJServer(context, request, response); }));}
     void SetMessageAllocatorFor_recibirMSJServer(
         ::grpc::MessageAllocator< ::Cliente_Productor::solicitudMSJ, ::Cliente_Productor::Mensaje>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::Cliente_Productor::solicitudMSJ, ::Cliente_Productor::Mensaje>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -212,7 +283,7 @@ class ClienteServicios final {
     virtual ::grpc::ServerUnaryReactor* recibirMSJServer(
       ::grpc::CallbackServerContext* /*context*/, const ::Cliente_Productor::solicitudMSJ* /*request*/, ::Cliente_Productor::Mensaje* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_enviarMensaje<WithCallbackMethod_recibirMSJServer<Service > > CallbackService;
+  typedef WithCallbackMethod_enviarMensaje<WithCallbackMethod_publicarMensaje<WithCallbackMethod_recibirMSJServer<Service > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_enviarMensaje : public BaseClass {
@@ -232,12 +303,29 @@ class ClienteServicios final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_publicarMensaje : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_publicarMensaje() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_publicarMensaje() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status publicarMensaje(::grpc::ServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_recibirMSJServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_recibirMSJServer() {
-      ::grpc::Service::MarkMethodGeneric(1);
+      ::grpc::Service::MarkMethodGeneric(2);
     }
     ~WithGenericMethod_recibirMSJServer() override {
       BaseClassMustBeDerivedFromService(this);
@@ -269,12 +357,32 @@ class ClienteServicios final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_publicarMensaje : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_publicarMensaje() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_publicarMensaje() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status publicarMensaje(::grpc::ServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestpublicarMensaje(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_recibirMSJServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_recibirMSJServer() {
-      ::grpc::Service::MarkMethodRaw(1);
+      ::grpc::Service::MarkMethodRaw(2);
     }
     ~WithRawMethod_recibirMSJServer() override {
       BaseClassMustBeDerivedFromService(this);
@@ -285,7 +393,7 @@ class ClienteServicios final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestrecibirMSJServer(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -311,12 +419,34 @@ class ClienteServicios final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
+  class WithRawCallbackMethod_publicarMensaje : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_publicarMensaje() {
+      ::grpc::Service::MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->publicarMensaje(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_publicarMensaje() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status publicarMensaje(::grpc::ServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* publicarMensaje(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
   class WithRawCallbackMethod_recibirMSJServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_recibirMSJServer() {
-      ::grpc::Service::MarkMethodRawCallback(1,
+      ::grpc::Service::MarkMethodRawCallback(2,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->recibirMSJServer(context, request, response); }));
@@ -360,12 +490,39 @@ class ClienteServicios final {
     virtual ::grpc::Status StreamedenviarMensaje(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Cliente_Productor::Mensaje,::Cliente_Productor::estadoMSJ>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_publicarMensaje : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_publicarMensaje() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ>* streamer) {
+                       return this->StreamedpublicarMensaje(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_publicarMensaje() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status publicarMensaje(::grpc::ServerContext* /*context*/, const ::Cliente_Productor::Mensaje* /*request*/, ::Cliente_Productor::estadoMSJ* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedpublicarMensaje(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Cliente_Productor::Mensaje,::Cliente_Productor::estadoMSJ>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_recibirMSJServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_recibirMSJServer() {
-      ::grpc::Service::MarkMethodStreamed(1,
+      ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
           ::Cliente_Productor::solicitudMSJ, ::Cliente_Productor::Mensaje>(
             [this](::grpc::ServerContext* context,
@@ -386,9 +543,9 @@ class ClienteServicios final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedrecibirMSJServer(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Cliente_Productor::solicitudMSJ,::Cliente_Productor::Mensaje>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_enviarMensaje<WithStreamedUnaryMethod_recibirMSJServer<Service > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_enviarMensaje<WithStreamedUnaryMethod_publicarMensaje<WithStreamedUnaryMethod_recibirMSJServer<Service > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_enviarMensaje<WithStreamedUnaryMethod_recibirMSJServer<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_enviarMensaje<WithStreamedUnaryMethod_publicarMensaje<WithStreamedUnaryMethod_recibirMSJServer<Service > > > StreamedService;
 };
 
 }  // namespace Cliente_Productor

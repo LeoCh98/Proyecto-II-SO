@@ -4,7 +4,9 @@ package Cliente_Productor;
 
 message Mensaje{
     int32 tema = 1;
-    string contenido = 2;
+    int32 idMensaje = 2; 
+    string contenido = 3;
+
 }
 
 message estadoMSJ{
@@ -15,9 +17,12 @@ message estadoMSJ{
 
  message solicitudMSJ{
     int32 tema = 1;
+    int32 idMensaje = 2;
  }
+
 
 service ClienteServicios{
     rpc enviarMensaje(Mensaje) returns (estadoMSJ) {}
+    rpc publicarMensaje(Mensaje) returns(estadoMSJ) {}
     rpc recibirMSJServer(solicitudMSJ) returns (Mensaje) {}
 }

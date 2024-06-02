@@ -23,6 +23,7 @@ namespace Cliente_Productor {
 
 static const char* ClienteServicios_method_names[] = {
   "/Cliente_Productor.ClienteServicios/enviarMensaje",
+  "/Cliente_Productor.ClienteServicios/publicarMensaje",
   "/Cliente_Productor.ClienteServicios/recibirMSJServer",
 };
 
@@ -34,7 +35,8 @@ std::unique_ptr< ClienteServicios::Stub> ClienteServicios::NewStub(const std::sh
 
 ClienteServicios::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_enviarMensaje_(ClienteServicios_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_recibirMSJServer_(ClienteServicios_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_publicarMensaje_(ClienteServicios_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_recibirMSJServer_(ClienteServicios_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status ClienteServicios::Stub::enviarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::Cliente_Productor::estadoMSJ* response) {
@@ -56,6 +58,29 @@ void ClienteServicios::Stub::async::enviarMensaje(::grpc::ClientContext* context
 ::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* ClienteServicios::Stub::AsyncenviarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncenviarMensajeRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status ClienteServicios::Stub::publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::Cliente_Productor::estadoMSJ* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_publicarMensaje_, context, request, response);
+}
+
+void ClienteServicios::Stub::async::publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_publicarMensaje_, context, request, response, std::move(f));
+}
+
+void ClienteServicios::Stub::async::publicarMensaje(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_publicarMensaje_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* ClienteServicios::Stub::PrepareAsyncpublicarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Cliente_Productor::estadoMSJ, ::Cliente_Productor::Mensaje, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_publicarMensaje_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Cliente_Productor::estadoMSJ>* ClienteServicios::Stub::AsyncpublicarMensajeRaw(::grpc::ClientContext* context, const ::Cliente_Productor::Mensaje& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncpublicarMensajeRaw(context, request, cq);
   result->StartCall();
   return result;
 }
@@ -97,6 +122,16 @@ ClienteServicios::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       ClienteServicios_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< ClienteServicios::Service, ::Cliente_Productor::Mensaje, ::Cliente_Productor::estadoMSJ, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](ClienteServicios::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Cliente_Productor::Mensaje* req,
+             ::Cliente_Productor::estadoMSJ* resp) {
+               return service->publicarMensaje(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      ClienteServicios_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< ClienteServicios::Service, ::Cliente_Productor::solicitudMSJ, ::Cliente_Productor::Mensaje, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](ClienteServicios::Service* service,
              ::grpc::ServerContext* ctx,
@@ -110,6 +145,13 @@ ClienteServicios::Service::~Service() {
 }
 
 ::grpc::Status ClienteServicios::Service::enviarMensaje(::grpc::ServerContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status ClienteServicios::Service::publicarMensaje(::grpc::ServerContext* context, const ::Cliente_Productor::Mensaje* request, ::Cliente_Productor::estadoMSJ* response) {
   (void) context;
   (void) request;
   (void) response;

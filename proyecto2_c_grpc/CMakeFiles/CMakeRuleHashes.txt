@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+b250e4b21799e34462f4b0fd6d50d3f9 Cliente_Proto.grpc.pb.h
+10c12e15df8e4df1dd1e4429b31e58fd Cliente_Proto.pb.h

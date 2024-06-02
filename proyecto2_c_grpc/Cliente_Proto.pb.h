@@ -202,6 +202,7 @@ class solicitudMSJ final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kTemaFieldNumber = 1,
+    kIdMensajeFieldNumber = 2,
   };
   // int32 tema = 1;
   void clear_tema() ;
@@ -213,12 +214,22 @@ class solicitudMSJ final : public ::google::protobuf::Message
   void _internal_set_tema(::int32_t value);
 
   public:
+  // int32 idMensaje = 2;
+  void clear_idmensaje() ;
+  ::int32_t idmensaje() const;
+  void set_idmensaje(::int32_t value);
+
+  private:
+  ::int32_t _internal_idmensaje() const;
+  void _internal_set_idmensaje(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:Cliente_Productor.solicitudMSJ)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
   friend class ::google::protobuf::MessageLite;
@@ -235,6 +246,7 @@ class solicitudMSJ final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from);
     ::int32_t tema_;
+    ::int32_t idmensaje_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -663,10 +675,11 @@ class Mensaje final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kContenidoFieldNumber = 2,
+    kContenidoFieldNumber = 3,
     kTemaFieldNumber = 1,
+    kIdMensajeFieldNumber = 2,
   };
-  // string contenido = 2;
+  // string contenido = 3;
   void clear_contenido() ;
   const std::string& contenido() const;
   template <typename Arg_ = const std::string&, typename... Args_>
@@ -692,12 +705,22 @@ class Mensaje final : public ::google::protobuf::Message
   void _internal_set_tema(::int32_t value);
 
   public:
+  // int32 idMensaje = 2;
+  void clear_idmensaje() ;
+  ::int32_t idmensaje() const;
+  void set_idmensaje(::int32_t value);
+
+  private:
+  ::int32_t _internal_idmensaje() const;
+  void _internal_set_idmensaje(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:Cliente_Productor.Mensaje)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      2, 3, 0,
       43, 2>
       _table_;
   friend class ::google::protobuf::MessageLite;
@@ -715,6 +738,7 @@ class Mensaje final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena, const Impl_& from);
     ::google::protobuf::internal::ArenaStringPtr contenido_;
     ::int32_t tema_;
+    ::int32_t idmensaje_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -760,7 +784,29 @@ inline void Mensaje::_internal_set_tema(::int32_t value) {
   _impl_.tema_ = value;
 }
 
-// string contenido = 2;
+// int32 idMensaje = 2;
+inline void Mensaje::clear_idmensaje() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.idmensaje_ = 0;
+}
+inline ::int32_t Mensaje::idmensaje() const {
+  // @@protoc_insertion_point(field_get:Cliente_Productor.Mensaje.idMensaje)
+  return _internal_idmensaje();
+}
+inline void Mensaje::set_idmensaje(::int32_t value) {
+  _internal_set_idmensaje(value);
+  // @@protoc_insertion_point(field_set:Cliente_Productor.Mensaje.idMensaje)
+}
+inline ::int32_t Mensaje::_internal_idmensaje() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.idmensaje_;
+}
+inline void Mensaje::_internal_set_idmensaje(::int32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.idmensaje_ = value;
+}
+
+// string contenido = 3;
 inline void Mensaje::clear_contenido() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   _impl_.contenido_.ClearToEmpty();
@@ -864,6 +910,28 @@ inline ::int32_t solicitudMSJ::_internal_tema() const {
 inline void solicitudMSJ::_internal_set_tema(::int32_t value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   _impl_.tema_ = value;
+}
+
+// int32 idMensaje = 2;
+inline void solicitudMSJ::clear_idmensaje() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.idmensaje_ = 0;
+}
+inline ::int32_t solicitudMSJ::idmensaje() const {
+  // @@protoc_insertion_point(field_get:Cliente_Productor.solicitudMSJ.idMensaje)
+  return _internal_idmensaje();
+}
+inline void solicitudMSJ::set_idmensaje(::int32_t value) {
+  _internal_set_idmensaje(value);
+  // @@protoc_insertion_point(field_set:Cliente_Productor.solicitudMSJ.idMensaje)
+}
+inline ::int32_t solicitudMSJ::_internal_idmensaje() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.idmensaje_;
+}
+inline void solicitudMSJ::_internal_set_idmensaje(::int32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.idmensaje_ = value;
 }
 
 #ifdef __GNUC__

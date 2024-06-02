@@ -7,22 +7,25 @@
 using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
+using grpc::ServerContext;
 
 //espacio de nombres y utilizacion de funciones del .proto
 using Cliente_Productor::ClienteServicios;
 
-class ClienteServiciosCl{
+class ClienteServiciosImpl{
 private:
 //instancia para las llamadas al server
 std::unique_ptr<ClienteServicios::Stub> canalPropio;
 public:
 
-ClienteServiciosCl(std::shared_ptr<Channel> canal)
+ClienteServiciosImpl(std::shared_ptr<Channel> canal)
 :canalPropio(ClienteServicios::NewStub(canal)){ }
 
 //funcion para publicar un tema
+//No es necesario especificar idMensaje porque ese se lo asigna el server
 bool enviarMensaje(int32_t Ptema, std::string Pcontenido){
     Cliente_Productor::Mensaje msj;
+    msj.set_idmensaje(-1);
     msj.set_tema(Ptema);
     msj.set_contenido(Pcontenido);
 
@@ -41,9 +44,10 @@ bool enviarMensaje(int32_t Ptema, std::string Pcontenido){
 }
 
 //funcion para solicitar un mensaje de un tema en especifico
-std::string RecibirMensaje(int32_t tema) {
+std::string RecibirMensaje(int32_t tema, int32_t PidMensaje) {
     Cliente_Productor::solicitudMSJ solicitud;
     solicitud.set_tema(tema);
+    solicitud.set_idmensaje(PidMensaje);
 
     Cliente_Productor::Mensaje mensaje;
     ClientContext context;
@@ -53,7 +57,7 @@ std::string RecibirMensaje(int32_t tema) {
     if (status.ok()) {
       return mensaje.contenido();
     } else {
-      std::cerr << "gRPC call failed: " << status.error_message() << std::endl;
+      std::cerr << "Hola gRPC call failed: " << status.error_message() << std::endl;
       return "";
     }
   }
@@ -68,17 +72,22 @@ if(argc == 1){
     return -1;
 }
    // std::string puerto = "6050";
-    ClienteServiciosCl client(grpc::CreateChannel("localhost:6050", grpc::InsecureChannelCredentials()));
+    ClienteServiciosImpl client(grpc::CreateChannel("192.168.100.68:6050", grpc::InsecureChannelCredentials()));
 
-  bool result = client.enviarMensaje(1, "Hello, Server!");
+  //probando conexion
+  bool result = client.enviarMensaje(0, "Hola servidor!");
   if (result) {
-    std::cout << "Message sent successfully!" << std::endl;
-  } else {
-    std::cout << "Failed to send message." << std::endl;
+    std::cout << "Se pudo completar la conexion cliente-servidor" << std::endl;
+    std::string response = client.RecibirMensaje(0, 0);
+    std::cout << "Mensaje recibido del server: " << response << std::endl;
+  }else{
+    std::cout << "No pudo completar la conexion cliente-servidor asegurese que la ip sea la correcta\n";
+    std::cout << "O asegurese que el server este encendido\n";
+    return -1;
   }
 
-  std::string response = client.RecibirMensaje(1);
-  std::cout << "Received message: " << response << std::endl;
+
+
 
   return 0;
 

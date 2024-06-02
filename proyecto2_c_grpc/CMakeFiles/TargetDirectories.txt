@@ -1,0 +1,4 @@
+/home/betocr23/proyecto2_c_grpc/CMakeFiles/protolib.dir
+/home/betocr23/proyecto2_c_grpc/CMakeFiles/cliente.dir
+/home/betocr23/proyecto2_c_grpc/CMakeFiles/edit_cache.dir
+/home/betocr23/proyecto2_c_grpc/CMakeFiles/rebuild_cache.dir

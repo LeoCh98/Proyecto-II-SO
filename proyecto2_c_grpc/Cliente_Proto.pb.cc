@@ -26,6 +26,7 @@ namespace Cliente_Productor {
 inline constexpr solicitudMSJ::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : tema_{0},
+        idmensaje_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -79,6 +80,7 @@ inline constexpr Mensaje::Impl_::Impl_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         tema_{0},
+        idmensaje_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -112,6 +114,7 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::Cliente_Productor::Mensaje, _impl_.tema_),
+        PROTOBUF_FIELD_OFFSET(::Cliente_Productor::Mensaje, _impl_.idmensaje_),
         PROTOBUF_FIELD_OFFSET(::Cliente_Productor::Mensaje, _impl_.contenido_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::Cliente_Productor::estadoMSJ, _internal_metadata_),
@@ -139,14 +142,15 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::Cliente_Productor::solicitudMSJ, _impl_.tema_),
+        PROTOBUF_FIELD_OFFSET(::Cliente_Productor::solicitudMSJ, _impl_.idmensaje_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::Cliente_Productor::Mensaje)},
-        {10, -1, -1, sizeof(::Cliente_Productor::estadoMSJ)},
-        {19, -1, -1, sizeof(::Cliente_Productor::Vacio)},
-        {27, -1, -1, sizeof(::Cliente_Productor::solicitudMSJ)},
+        {11, -1, -1, sizeof(::Cliente_Productor::estadoMSJ)},
+        {20, -1, -1, sizeof(::Cliente_Productor::Vacio)},
+        {28, -1, -1, sizeof(::Cliente_Productor::solicitudMSJ)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::Cliente_Productor::_Mensaje_default_instance_._instance,
@@ -157,20 +161,23 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_Cliente_5fProto_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\023Cliente_Proto.proto\022\021Cliente_Productor"
-    "\"*\n\007Mensaje\022\014\n\004tema\030\001 \001(\005\022\021\n\tcontenido\030\002"
-    " \001(\t\"\035\n\testadoMSJ\022\020\n\010recibido\030\001 \001(\010\"\007\n\005V"
-    "acio\"\034\n\014solicitudMSJ\022\014\n\004tema\030\001 \001(\0052\262\001\n\020C"
-    "lienteServicios\022K\n\renviarMensaje\022\032.Clien"
-    "te_Productor.Mensaje\032\034.Cliente_Productor"
-    ".estadoMSJ\"\000\022Q\n\020recibirMSJServer\022\037.Clien"
-    "te_Productor.solicitudMSJ\032\032.Cliente_Prod"
-    "uctor.Mensaje\"\000b\006proto3"
+    "\"=\n\007Mensaje\022\014\n\004tema\030\001 \001(\005\022\021\n\tidMensaje\030\002"
+    " \001(\005\022\021\n\tcontenido\030\003 \001(\t\"\035\n\testadoMSJ\022\020\n\010"
+    "recibido\030\001 \001(\010\"\007\n\005Vacio\"/\n\014solicitudMSJ\022"
+    "\014\n\004tema\030\001 \001(\005\022\021\n\tidMensaje\030\002 \001(\0052\201\002\n\020Cli"
+    "enteServicios\022K\n\renviarMensaje\022\032.Cliente"
+    "_Productor.Mensaje\032\034.Cliente_Productor.e"
+    "stadoMSJ\"\000\022M\n\017publicarMensaje\022\032.Cliente_"
+    "Productor.Mensaje\032\034.Cliente_Productor.es"
+    "tadoMSJ\"\000\022Q\n\020recibirMSJServer\022\037.Cliente_"
+    "Productor.solicitudMSJ\032\032.Cliente_Product"
+    "or.Mensaje\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_Cliente_5fProto_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Cliente_5fProto_2eproto = {
     false,
     false,
-    343,
+    460,
     descriptor_table_protodef_Cliente_5fProto_2eproto,
     "Cliente_Proto.proto",
     &descriptor_table_Cliente_5fProto_2eproto_once,
@@ -226,7 +233,13 @@ Mensaje::Mensaje(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
-  _impl_.tema_ = from._impl_.tema_;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, tema_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, tema_),
+           offsetof(Impl_, idmensaje_) -
+               offsetof(Impl_, tema_) +
+               sizeof(Impl_::idmensaje_));
 
   // @@protoc_insertion_point(copy_constructor:Cliente_Productor.Mensaje)
 }
@@ -238,7 +251,12 @@ inline PROTOBUF_NDEBUG_INLINE Mensaje::Impl_::Impl_(
 
 inline void Mensaje::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.tema_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, tema_),
+           0,
+           offsetof(Impl_, idmensaje_) -
+               offsetof(Impl_, tema_) +
+               sizeof(Impl_::idmensaje_));
 }
 Mensaje::~Mensaje() {
   // @@protoc_insertion_point(destructor:Cliente_Productor.Mensaje)
@@ -273,7 +291,9 @@ PROTOBUF_NOINLINE void Mensaje::Clear() {
   (void) cached_has_bits;
 
   _impl_.contenido_.ClearToEmpty();
-  _impl_.tema_ = 0;
+  ::memset(&_impl_.tema_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.idmensaje_) -
+      reinterpret_cast<char*>(&_impl_.tema_)) + sizeof(_impl_.idmensaje_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -285,15 +305,15 @@ const char* Mensaje::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 43, 2> Mensaje::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 43, 2> Mensaje::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    3,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     &_Mensaje_default_instance_._instance,
@@ -302,25 +322,32 @@ const ::_pbi::TcParseTable<1, 2, 0, 43, 2> Mensaje::_table_ = {
     ::_pbi::TcParser::GetTable<::Cliente_Productor::Mensaje>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // string contenido = 2;
-    {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.contenido_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // int32 tema = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mensaje, _impl_.tema_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.tema_)}},
+    // int32 idMensaje = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mensaje, _impl_.idmensaje_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.idmensaje_)}},
+    // string contenido = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.contenido_)}},
   }}, {{
     65535, 65535
   }}, {{
     // int32 tema = 1;
     {PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.tema_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // string contenido = 2;
+    // int32 idMensaje = 2;
+    {PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.idmensaje_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string contenido = 3;
     {PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.contenido_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\31\0\11\0\0\0\0\0"
+    "\31\0\0\11\0\0\0\0"
     "Cliente_Productor.Mensaje"
     "contenido"
   }},
@@ -340,12 +367,19 @@ const ::_pbi::TcParseTable<1, 2, 0, 43, 2> Mensaje::_table_ = {
             stream, this->_internal_tema(), target);
   }
 
-  // string contenido = 2;
+  // int32 idMensaje = 2;
+  if (this->_internal_idmensaje() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<2>(
+            stream, this->_internal_idmensaje(), target);
+  }
+
+  // string contenido = 3;
   if (!this->_internal_contenido().empty()) {
     const std::string& _s = this->_internal_contenido();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
         _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Cliente_Productor.Mensaje.contenido");
-    target = stream->WriteStringMaybeAliased(2, _s, target);
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -365,7 +399,7 @@ const ::_pbi::TcParseTable<1, 2, 0, 43, 2> Mensaje::_table_ = {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string contenido = 2;
+  // string contenido = 3;
   if (!this->_internal_contenido().empty()) {
     total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
                                     this->_internal_contenido());
@@ -375,6 +409,12 @@ const ::_pbi::TcParseTable<1, 2, 0, 43, 2> Mensaje::_table_ = {
   if (this->_internal_tema() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
         this->_internal_tema());
+  }
+
+  // int32 idMensaje = 2;
+  if (this->_internal_idmensaje() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_idmensaje());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -394,6 +434,9 @@ void Mensaje::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
   }
   if (from._internal_tema() != 0) {
     _this->_impl_.tema_ = from._impl_.tema_;
+  }
+  if (from._internal_idmensaje() != 0) {
+    _this->_impl_.idmensaje_ = from._impl_.idmensaje_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -415,7 +458,12 @@ void Mensaje::InternalSwap(Mensaje* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.contenido_, &other->_impl_.contenido_, arena);
-        swap(_impl_.tema_, other->_impl_.tema_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.idmensaje_)
+      + sizeof(Mensaje::_impl_.idmensaje_)
+      - PROTOBUF_FIELD_OFFSET(Mensaje, _impl_.tema_)>(
+          reinterpret_cast<char*>(&_impl_.tema_),
+          reinterpret_cast<char*>(&other->_impl_.tema_));
 }
 
 ::google::protobuf::Metadata Mensaje::GetMetadata() const {
@@ -657,7 +705,12 @@ inline PROTOBUF_NDEBUG_INLINE solicitudMSJ::Impl_::Impl_(
 
 inline void solicitudMSJ::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.tema_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, tema_),
+           0,
+           offsetof(Impl_, idmensaje_) -
+               offsetof(Impl_, tema_) +
+               sizeof(Impl_::idmensaje_));
 }
 solicitudMSJ::~solicitudMSJ() {
   // @@protoc_insertion_point(destructor:Cliente_Productor.solicitudMSJ)
@@ -690,7 +743,9 @@ PROTOBUF_NOINLINE void solicitudMSJ::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.tema_ = 0;
+  ::memset(&_impl_.tema_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.idmensaje_) -
+      reinterpret_cast<char*>(&_impl_.tema_)) + sizeof(_impl_.idmensaje_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -702,15 +757,15 @@ const char* solicitudMSJ::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> solicitudMSJ::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> solicitudMSJ::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     &_solicitudMSJ_default_instance_._instance,
@@ -719,6 +774,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> solicitudMSJ::_table_ = {
     ::_pbi::TcParser::GetTable<::Cliente_Productor::solicitudMSJ>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    // int32 idMensaje = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(solicitudMSJ, _impl_.idmensaje_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(solicitudMSJ, _impl_.idmensaje_)}},
     // int32 tema = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(solicitudMSJ, _impl_.tema_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(solicitudMSJ, _impl_.tema_)}},
@@ -727,6 +785,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> solicitudMSJ::_table_ = {
   }}, {{
     // int32 tema = 1;
     {PROTOBUF_FIELD_OFFSET(solicitudMSJ, _impl_.tema_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 idMensaje = 2;
+    {PROTOBUF_FIELD_OFFSET(solicitudMSJ, _impl_.idmensaje_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -746,6 +807,13 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> solicitudMSJ::_table_ = {
     target = ::google::protobuf::internal::WireFormatLite::
         WriteInt32ToArrayWithField<1>(
             stream, this->_internal_tema(), target);
+  }
+
+  // int32 idMensaje = 2;
+  if (this->_internal_idmensaje() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<2>(
+            stream, this->_internal_idmensaje(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -771,6 +839,12 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> solicitudMSJ::_table_ = {
         this->_internal_tema());
   }
 
+  // int32 idMensaje = 2;
+  if (this->_internal_idmensaje() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_idmensaje());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -785,6 +859,9 @@ void solicitudMSJ::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::go
 
   if (from._internal_tema() != 0) {
     _this->_impl_.tema_ = from._impl_.tema_;
+  }
+  if (from._internal_idmensaje() != 0) {
+    _this->_impl_.idmensaje_ = from._impl_.idmensaje_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -803,7 +880,12 @@ PROTOBUF_NOINLINE bool solicitudMSJ::IsInitialized() const {
 void solicitudMSJ::InternalSwap(solicitudMSJ* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.tema_, other->_impl_.tema_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(solicitudMSJ, _impl_.idmensaje_)
+      + sizeof(solicitudMSJ::_impl_.idmensaje_)
+      - PROTOBUF_FIELD_OFFSET(solicitudMSJ, _impl_.tema_)>(
+          reinterpret_cast<char*>(&_impl_.tema_),
+          reinterpret_cast<char*>(&other->_impl_.tema_));
 }
 
 ::google::protobuf::Metadata solicitudMSJ::GetMetadata() const {
