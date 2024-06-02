@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/cliente_grpc.dir/Cliente.cpp.o CMakeFiles/cliente_grpc.dir/Cliente_Proto.pb.cc.o CMakeFiles/cliente_grpc.dir/Cliente_Proto.grpc.pb.cc.o -o cliente_grpc  -lgrpc++ -lgrpc 
