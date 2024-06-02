@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LkT9GHlXV82EGkdd5SvmiJDPu9NQGidfz3pFodrLWkKNZW4xPDNVfHpQ3EMJ9JJx9uxEG38MnLZC7PYt8r9NKQ==",
+  "dgSpecHash": "LANnV4vw1IOH2i918QIh9Zq+ubw96uON09IONfnBK8MX1SO3iMfL6JlwhtAKtVqJ2BGjTHDovF8Kt2eBNk4klw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\proyecto 2\\GrpcService1\\GrpcService1\\GrpcService1.csproj",
+  "projectFilePath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\Proyecto-II-SO\\GrpcService1\\GrpcService1\\GrpcService1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alexb\\.nuget\\packages\\google.protobuf\\3.27.0\\google.protobuf.3.27.0.nupkg.sha512",
     "C:\\Users\\alexb\\.nuget\\packages\\grpc.aspnetcore\\2.63.0\\grpc.aspnetcore.2.63.0.nupkg.sha512",

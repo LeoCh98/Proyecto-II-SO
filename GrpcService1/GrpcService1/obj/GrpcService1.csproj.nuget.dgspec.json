@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\proyecto 2\\GrpcService1\\GrpcService1\\GrpcService1.csproj": {}
+    "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\Proyecto-II-SO\\GrpcService1\\GrpcService1\\GrpcService1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\proyecto 2\\GrpcService1\\GrpcService1\\GrpcService1.csproj": {
+    "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\Proyecto-II-SO\\GrpcService1\\GrpcService1\\GrpcService1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\proyecto 2\\GrpcService1\\GrpcService1\\GrpcService1.csproj",
+        "projectUniqueName": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\Proyecto-II-SO\\GrpcService1\\GrpcService1\\GrpcService1.csproj",
         "projectName": "GrpcService1",
-        "projectPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\proyecto 2\\GrpcService1\\GrpcService1\\GrpcService1.csproj",
+        "projectPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\Proyecto-II-SO\\GrpcService1\\GrpcService1\\GrpcService1.csproj",
         "packagesPath": "C:\\Users\\alexb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\proyecto 2\\GrpcService1\\GrpcService1\\obj\\",
+        "outputPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\Proyecto-II-SO\\GrpcService1\\GrpcService1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
