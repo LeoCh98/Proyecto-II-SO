@@ -1,0 +1,7 @@
+01/06/2024:23:47:30 Mensaje publicado en el tema hola
+01/06/2024:23:47:48 Cliente suscrito al tema hola
+01/06/2024:23:49:26 Cliente suscrito al tema perro
+01/06/2024:23:49:31 Cliente desconectado del tema perro
+01/06/2024:23:49:51 Mensaje publicado en el tema carro
+02/06/2024:00:52:49 Cliente desconectado del tema hola
+02/06/2024:17:02:58 Mensaje publicado en el tema hola
