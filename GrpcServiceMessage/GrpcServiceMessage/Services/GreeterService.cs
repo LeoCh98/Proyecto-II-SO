@@ -6,6 +6,9 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading.Tasks;
 
+using System.Collections.Generic;
+
+
 namespace GrpcServiceMessage.Services
 {
     public class MessageBrokerService : MessageBroker.MessageBrokerBase
@@ -33,10 +36,13 @@ namespace GrpcServiceMessage.Services
             */
              Console.WriteLine(request.Message);
             Console.WriteLine(request.Topic);
+            Console.WriteLine(request.IdPublish);
 
 
 
-            return Task.FromResult(new PublishReply { Status = "Mensaje publicado" });
+             LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
+
+            return Task.FromResult(new PublishReply { Status = "publicacion guardada" });
         }
 
 

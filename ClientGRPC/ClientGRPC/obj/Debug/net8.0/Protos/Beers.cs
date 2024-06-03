@@ -24,17 +24,18 @@ namespace ClientGRPC {
     static BeersReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChJQcm90b3MvYmVlcnMucHJvdG8iMAoOUHVibGlzaFJlcXVlc3QSDQoFdG9w",
-            "aWMYASABKAkSDwoHbWVzc2FnZRgCIAEoCSIeCgxQdWJsaXNoUmVwbHkSDgoG",
-            "c3RhdHVzGAEgASgJIiEKEFN1YnNjcmliZVJlcXVlc3QSDQoFdG9waWMYASAB",
-            "KAkiKQoHTWVzc2FnZRINCgV0b3BpYxgBIAEoCRIPCgdtZXNzYWdlGAIgASgJ",
-            "MmYKDU1lc3NhZ2VCcm9rZXISKQoHUHVibGlzaBIPLlB1Ymxpc2hSZXF1ZXN0",
-            "Gg0uUHVibGlzaFJlcGx5EioKCVN1YnNjcmliZRIRLlN1YnNjcmliZVJlcXVl",
-            "c3QaCC5NZXNzYWdlMAFCDaoCCkNsaWVudEdSUENiBnByb3RvMw=="));
+            "ChJQcm90b3MvYmVlcnMucHJvdG8iQwoOUHVibGlzaFJlcXVlc3QSDQoFdG9w",
+            "aWMYASABKAkSDwoHbWVzc2FnZRgCIAEoCRIRCglpZFB1Ymxpc2gYAyABKAki",
+            "HgoMUHVibGlzaFJlcGx5Eg4KBnN0YXR1cxgBIAEoCSIhChBTdWJzY3JpYmVS",
+            "ZXF1ZXN0Eg0KBXRvcGljGAEgASgJIikKB01lc3NhZ2USDQoFdG9waWMYASAB",
+            "KAkSDwoHbWVzc2FnZRgCIAEoCTJmCg1NZXNzYWdlQnJva2VyEikKB1B1Ymxp",
+            "c2gSDy5QdWJsaXNoUmVxdWVzdBoNLlB1Ymxpc2hSZXBseRIqCglTdWJzY3Jp",
+            "YmUSES5TdWJzY3JpYmVSZXF1ZXN0GgguTWVzc2FnZTABQg2qAgpDbGllbnRH",
+            "UlBDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ClientGRPC.PublishRequest), global::ClientGRPC.PublishRequest.Parser, new[]{ "Topic", "Message" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ClientGRPC.PublishRequest), global::ClientGRPC.PublishRequest.Parser, new[]{ "Topic", "Message", "IdPublish" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ClientGRPC.PublishReply), global::ClientGRPC.PublishReply.Parser, new[]{ "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ClientGRPC.SubscribeRequest), global::ClientGRPC.SubscribeRequest.Parser, new[]{ "Topic" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ClientGRPC.Message), global::ClientGRPC.Message.Parser, new[]{ "Topic", "Message_" }, null, null, null, null)
@@ -81,6 +82,7 @@ namespace ClientGRPC {
     public PublishRequest(PublishRequest other) : this() {
       topic_ = other.topic_;
       message_ = other.message_;
+      idPublish_ = other.idPublish_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -114,6 +116,18 @@ namespace ClientGRPC {
       }
     }
 
+    /// <summary>Field number for the "idPublish" field.</summary>
+    public const int IdPublishFieldNumber = 3;
+    private string idPublish_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string IdPublish {
+      get { return idPublish_; }
+      set {
+        idPublish_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -131,6 +145,7 @@ namespace ClientGRPC {
       }
       if (Topic != other.Topic) return false;
       if (Message != other.Message) return false;
+      if (IdPublish != other.IdPublish) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -140,6 +155,7 @@ namespace ClientGRPC {
       int hash = 1;
       if (Topic.Length != 0) hash ^= Topic.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (IdPublish.Length != 0) hash ^= IdPublish.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -166,6 +182,10 @@ namespace ClientGRPC {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
+      if (IdPublish.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(IdPublish);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -184,6 +204,10 @@ namespace ClientGRPC {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
+      if (IdPublish.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(IdPublish);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -199,6 +223,9 @@ namespace ClientGRPC {
       }
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (IdPublish.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(IdPublish);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -217,6 +244,9 @@ namespace ClientGRPC {
       }
       if (other.Message.Length != 0) {
         Message = other.Message;
+      }
+      if (other.IdPublish.Length != 0) {
+        IdPublish = other.IdPublish;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -241,6 +271,10 @@ namespace ClientGRPC {
             Message = input.ReadString();
             break;
           }
+          case 26: {
+            IdPublish = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -262,6 +296,10 @@ namespace ClientGRPC {
           }
           case 18: {
             Message = input.ReadString();
+            break;
+          }
+          case 26: {
+            IdPublish = input.ReadString();
             break;
           }
         }

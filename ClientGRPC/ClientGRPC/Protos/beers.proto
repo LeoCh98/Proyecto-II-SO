@@ -11,6 +11,7 @@ service MessageBroker {
 message PublishRequest {
     string topic = 1;
     string message = 2;
+    string idPublish= 3;
 }
 
 message PublishReply {
