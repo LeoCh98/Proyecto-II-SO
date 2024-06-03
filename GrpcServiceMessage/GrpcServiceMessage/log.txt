@@ -5,3 +5,8 @@
 01/06/2024:23:49:51 Mensaje publicado en el tema carro
 02/06/2024:00:52:49 Cliente desconectado del tema hola
 02/06/2024:17:02:58 Mensaje publicado en el tema hola
+02/06/2024:17:23:30 Mensaje publicado en el tema perro
+02/06/2024:17:24:05 Mensaje publicado en el tema f
+02/06/2024:19:56:11 Mensaje publicado en el tema hola
+02/06/2024:21:55:20 Cliente suscrito al tema hola
+02/06/2024:21:55:28 Cliente desconectado del tema hola

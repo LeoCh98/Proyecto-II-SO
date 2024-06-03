@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ClientGRPC
-build_property.ProjectDir = C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\ClientGRPC\ClientGRPC\
+build_property.ProjectDir = C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\GRPC\ClientGRPC\ClientGRPC\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

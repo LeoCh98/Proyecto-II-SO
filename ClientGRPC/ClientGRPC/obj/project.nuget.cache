@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J7G/QhLNg2YSL0cjf2s9o3JFQbVc/JeG2Mh0s573sLhGUYsyTxB7F49KEdEqzaf3tYPb2DbiK048Y8Y5Mz+Apw==",
+  "dgSpecHash": "qoytvCVrObg3catuqzJLB8E9U5ki4sTApo1R8m4MiZkSTSKomShwSh3DASmhSngM6hP2cXdM3UHXA4aaff3qsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\Plantillas personalizadas de Office\\ClientGRPC\\ClientGRPC\\ClientGRPC.csproj",
+  "projectFilePath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\ClientGRPC\\ClientGRPC\\ClientGRPC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alexb\\.nuget\\packages\\google.protobuf\\3.27.0\\google.protobuf.3.27.0.nupkg.sha512",
     "C:\\Users\\alexb\\.nuget\\packages\\grpc.core.api\\2.63.0\\grpc.core.api.2.63.0.nupkg.sha512",

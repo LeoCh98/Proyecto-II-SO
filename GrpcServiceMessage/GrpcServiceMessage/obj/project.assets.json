@@ -796,11 +796,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\Plantillas personalizadas de Office\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj",
+      "projectUniqueName": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj",
       "projectName": "GrpcServiceMessage",
-      "projectPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\Plantillas personalizadas de Office\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj",
+      "projectPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj",
       "packagesPath": "C:\\Users\\alexb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\Plantillas personalizadas de Office\\GrpcServiceMessage\\GrpcServiceMessage\\obj\\",
+      "outputPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

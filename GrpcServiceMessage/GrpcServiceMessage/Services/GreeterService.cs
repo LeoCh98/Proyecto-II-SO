@@ -23,12 +23,18 @@ namespace GrpcServiceMessage.Services
 
         public override Task<PublishReply> Publish(PublishRequest request, ServerCallContext context)
         {
+            /*
             var queue = _topics.GetOrAdd(request.Topic, new ConcurrentQueue<string>());
             queue.Enqueue(request.Message);
 
             LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
 
             NotifySubscribers(request.Topic, request.Message);
+            */
+             Console.WriteLine(request.Message);
+            Console.WriteLine(request.Topic);
+
+
 
             return Task.FromResult(new PublishReply { Status = "Mensaje publicado" });
         }
