@@ -68,7 +68,7 @@ namespace ClientGRPC {
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::ClientGRPC.SubscribeRequest, global::ClientGRPC.Message> __Method_Subscribe = new grpc::Method<global::ClientGRPC.SubscribeRequest, global::ClientGRPC.Message>(
-        grpc::MethodType.ServerStreaming,
+        grpc::MethodType.Unary,
         __ServiceName,
         "Subscribe",
         __Marshaller_SubscribeRequest,
@@ -99,7 +99,7 @@ namespace ClientGRPC {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task Subscribe(global::ClientGRPC.SubscribeRequest request, grpc::IServerStreamWriter<global::ClientGRPC.Message> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::ClientGRPC.Message> Subscribe(global::ClientGRPC.SubscribeRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -160,14 +160,24 @@ namespace ClientGRPC {
         return CallInvoker.AsyncUnaryCall(__Method_Publish, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::ClientGRPC.Message> Subscribe(global::ClientGRPC.SubscribeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::ClientGRPC.Message Subscribe(global::ClientGRPC.SubscribeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Subscribe(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::ClientGRPC.Message> Subscribe(global::ClientGRPC.SubscribeRequest request, grpc::CallOptions options)
+      public virtual global::ClientGRPC.Message Subscribe(global::ClientGRPC.SubscribeRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_Subscribe, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_Subscribe, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::ClientGRPC.Message> SubscribeAsync(global::ClientGRPC.SubscribeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SubscribeAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::ClientGRPC.Message> SubscribeAsync(global::ClientGRPC.SubscribeRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Subscribe, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::ClientGRPC.TopicList GetTopics(global::ClientGRPC.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
@@ -216,7 +226,7 @@ namespace ClientGRPC {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, MessageBrokerBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Publish, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.PublishRequest, global::ClientGRPC.PublishReply>(serviceImpl.Publish));
-      serviceBinder.AddMethod(__Method_Subscribe, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ClientGRPC.SubscribeRequest, global::ClientGRPC.Message>(serviceImpl.Subscribe));
+      serviceBinder.AddMethod(__Method_Subscribe, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.SubscribeRequest, global::ClientGRPC.Message>(serviceImpl.Subscribe));
       serviceBinder.AddMethod(__Method_GetTopics, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.Empty, global::ClientGRPC.TopicList>(serviceImpl.GetTopics));
     }
 

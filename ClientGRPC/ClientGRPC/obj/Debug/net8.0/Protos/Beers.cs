@@ -29,11 +29,11 @@ namespace ClientGRPC {
             "HgoMUHVibGlzaFJlcGx5Eg4KBnN0YXR1cxgBIAEoCSIhChBTdWJzY3JpYmVS",
             "ZXF1ZXN0Eg0KBXRvcGljGAEgASgJIjoKB01lc3NhZ2USDQoFdG9waWMYASAB",
             "KAkSDwoHbWVzc2FnZRgCIAEoCRIPCgdjb250ZW50GAMgASgJIgcKBUVtcHR5",
-            "IhsKCVRvcGljTGlzdBIOCgZ0b3BpY3MYASADKAkyhwEKDU1lc3NhZ2VCcm9r",
+            "IhsKCVRvcGljTGlzdBIOCgZ0b3BpY3MYASADKAkyhQEKDU1lc3NhZ2VCcm9r",
             "ZXISKQoHUHVibGlzaBIPLlB1Ymxpc2hSZXF1ZXN0Gg0uUHVibGlzaFJlcGx5",
-            "EioKCVN1YnNjcmliZRIRLlN1YnNjcmliZVJlcXVlc3QaCC5NZXNzYWdlMAES",
-            "HwoJR2V0VG9waWNzEgYuRW1wdHkaCi5Ub3BpY0xpc3RCDaoCCkNsaWVudEdS",
-            "UENiBnByb3RvMw=="));
+            "EigKCVN1YnNjcmliZRIRLlN1YnNjcmliZVJlcXVlc3QaCC5NZXNzYWdlEh8K",
+            "CUdldFRvcGljcxIGLkVtcHR5GgouVG9waWNMaXN0Qg2qAgpDbGllbnRHUlBD",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {

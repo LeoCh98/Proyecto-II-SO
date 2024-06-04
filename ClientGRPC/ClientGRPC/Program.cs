@@ -73,21 +73,42 @@ async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client, String 
     }
 }
 
-async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
+async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
 {
-    Console.Clear();
-    Console.WriteLine("Ingrese el tema:");
-    var topic = Console.ReadLine();
-    Console.WriteLine("Ingrese el mensaje:");
-    var message = Console.ReadLine();
+    while (true)
+    {
+        Console.Clear();
+        Console.WriteLine("Menú Suscripciones:");
+        Console.WriteLine("1. Suscribirse a un tema");
+        Console.WriteLine("2. Ver mis suscripciones");
+        Console.WriteLine("3. Ver suscripciones disponibles");
+        Console.WriteLine("4. Volver al menú principal");
 
-    var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
+        var option = Console.ReadLine();
 
-    Console.WriteLine("Respuesta del servidor: " + reply.Status);
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
+        if (option == "1")
+        {
+            await SubscribeToTopic(client);
+        }
+        else if (option == "2")
+        {
+            ListarMisSuscripciones();
+        }
+        else if (option == "3")
+        {
+            await ListarTemas(client);
+        }
+        else if (option == "4")
+        {
+            break;
+        }
+    }
 }
 
+
+
+
+//------------------------------------------------------------------------------------------------
 async Task ListarTemas(MessageBroker.MessageBrokerClient client)
 {
     Console.Clear();
@@ -106,46 +127,16 @@ async Task ListarTemas(MessageBroker.MessageBrokerClient client)
     Console.ReadKey();
 }
 
-async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
-{
-    while (true)
-    {
-        Console.Clear();
-        Console.WriteLine("Menú Suscripciones:");
-        Console.WriteLine("1. Suscribirse a un tema");
-        Console.WriteLine("2. Ver mis suscripciones");
-        Console.WriteLine("3. Ver suscripciones disponibles");
-        Console.WriteLine("4. Volver al menú principal");
 
-        var option = Console.ReadLine();
 
-        if (option == "1")
-        {
-            await SubscribeToTopic(client, cancellationToken);
-        }
-        else if (option == "2")
-        {
-            ListarMisSuscripciones();
-        }
-        else if (option == "3")
-        {
-            await ListarTemas(client);
-        }
-        else if (option == "4")
-        {
-            break;
-        }
-    }
-}
-
-async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
+async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 {
     await ListarTemas(client);
 
-    Console.Clear();
+
     Console.WriteLine("Ingrese el tema:");
     var topic = Console.ReadLine();
-
+    Console.Clear();
     if (!temas.Contains(topic))
     {
         Console.WriteLine("El tema no existe.");
@@ -154,28 +145,67 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client, Cancellati
         return;
     }
 
-    using var stream = client.Subscribe(new SubscribeRequest { Topic = topic }, cancellationToken: cancellationToken);
+    Console.Clear();
+
+
+
+
+    var response = await client.SubscribeAsync(new SubscribeRequest { Topic = topic });
+
+
+
 
     if (!suscripciones.Contains(topic))
     {
         suscripciones.Add(topic);
+        Console.WriteLine("Suscrito al tema: " + topic);
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
     }
 
-    Console.WriteLine("Suscrito al tema: " + topic);
-    Console.WriteLine("Presione Ctrl+C para cancelar la suscripción.");
+    if (suscripciones.Contains(topic))
+    {
+        Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
+    }
 
-    try
-    {
-        await foreach (var message in stream.ResponseStream.ReadAllAsync(cancellationToken: cancellationToken))
-        {
-            Console.WriteLine($"Mensaje recibido del tema {message.Topic}: {message.Message_}");
-        }
-    }
-    catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.Cancelled)
-    {
-        Console.WriteLine("La suscripción fue cancelada.");
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
+{
+    Console.Clear();
+    Console.WriteLine("Ingrese el tema:");
+    var topic = Console.ReadLine();
+    Console.WriteLine("Ingrese el mensaje:");
+    var message = Console.ReadLine();
+
+    var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
+
+    Console.WriteLine("Respuesta del servidor: " + reply.Status);
+    Console.WriteLine("Presione una tecla para continuar...");
+    Console.ReadKey();
+}
+
+
+
+
+
+
 
 void ListarMisSuscripciones()
 {

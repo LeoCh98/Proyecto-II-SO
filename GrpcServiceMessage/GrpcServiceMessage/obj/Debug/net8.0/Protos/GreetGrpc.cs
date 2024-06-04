@@ -68,7 +68,7 @@ namespace GrpcServiceMessage {
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GrpcServiceMessage.SubscribeRequest, global::GrpcServiceMessage.Message> __Method_Subscribe = new grpc::Method<global::GrpcServiceMessage.SubscribeRequest, global::GrpcServiceMessage.Message>(
-        grpc::MethodType.ServerStreaming,
+        grpc::MethodType.Unary,
         __ServiceName,
         "Subscribe",
         __Marshaller_SubscribeRequest,
@@ -99,7 +99,7 @@ namespace GrpcServiceMessage {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task Subscribe(global::GrpcServiceMessage.SubscribeRequest request, grpc::IServerStreamWriter<global::GrpcServiceMessage.Message> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::GrpcServiceMessage.Message> Subscribe(global::GrpcServiceMessage.SubscribeRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -131,7 +131,7 @@ namespace GrpcServiceMessage {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, MessageBrokerBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Publish, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcServiceMessage.PublishRequest, global::GrpcServiceMessage.PublishReply>(serviceImpl.Publish));
-      serviceBinder.AddMethod(__Method_Subscribe, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GrpcServiceMessage.SubscribeRequest, global::GrpcServiceMessage.Message>(serviceImpl.Subscribe));
+      serviceBinder.AddMethod(__Method_Subscribe, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcServiceMessage.SubscribeRequest, global::GrpcServiceMessage.Message>(serviceImpl.Subscribe));
       serviceBinder.AddMethod(__Method_GetTopics, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcServiceMessage.Empty, global::GrpcServiceMessage.TopicList>(serviceImpl.GetTopics));
     }
 

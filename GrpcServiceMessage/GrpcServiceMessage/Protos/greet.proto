@@ -4,7 +4,7 @@ option csharp_namespace = "GrpcServiceMessage";
 
 service MessageBroker {
     rpc Publish(PublishRequest) returns (PublishReply);
-    rpc Subscribe(SubscribeRequest) returns (stream Message);
+    rpc Subscribe(SubscribeRequest) returns ( Message);
     rpc GetTopics (Empty) returns (TopicList);
 }
 

@@ -13,7 +13,11 @@ namespace ClientGRPC
         public string Nombre { get; set; }
         public int Edad { get; set; }
 
-        
+        public List<string> TopicsSubscritos { get; set; } // Lista de temas a los que está suscrito el cliente
+        public List<string> TopicsPublish { get; set; } // Lista de temas a los que está suscrito el cliente
+
+
+
         public Cliente(string id, string nombre, int edad)
         {
             Id = id;
@@ -28,5 +32,22 @@ namespace ClientGRPC
             Console.WriteLine($"Nombre: {Nombre}");
             Console.WriteLine($"Edad: {Edad}");
         }
+
+
+
+
+        // Método para agregar un nuevo tema a los temas suscritos
+        public void IngresarTopicsSubscritos(string topic)
+        {
+            TopicsSubscritos.Add(topic);
+        }
+
+        public void IngresarTopicsPublish(string topic)
+        {
+            TopicsPublish.Add(topic);
+        }
+
+
+
     }
 }
