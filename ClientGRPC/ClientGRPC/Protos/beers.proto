@@ -6,6 +6,7 @@ option csharp_namespace = "ClientGRPC";
 service MessageBroker {
     rpc Publish(PublishRequest) returns (PublishReply);
     rpc Subscribe(SubscribeRequest) returns (stream Message);
+    rpc GetTopics (Empty) returns (TopicList);
 }
 
 message PublishRequest {
@@ -25,4 +26,10 @@ message SubscribeRequest {
 message Message {
     string topic = 1;
     string message = 2;
+    string content = 3;
+}
+message Empty {}
+
+message TopicList {
+    repeated string topics = 1;
 }

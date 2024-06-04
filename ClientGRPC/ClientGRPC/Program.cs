@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+
+
 List<string> temas = new List<string>(); // Lista para almacenar los temas
 List<string> suscripciones = new List<string>(); // Lista para almacenar las suscripciones del usuario
 
@@ -17,47 +19,12 @@ var cts = new CancellationTokenSource();
 Cliente c = null;
 
 while (true)
-
 {
-
     if (c == null)
     {
-        /*
-        Console.WriteLine("-------------------------Bienvenido---------------------------: ");
-        Console.WriteLine();
-        Console.WriteLine("Ingrese su identificacion: ");
-        string Identificacion = Console.ReadLine();
-
-        Console.WriteLine("Ingrese su nombre: ");
-        string Nombre = Console.ReadLine();
-
-        Console.WriteLine("Ingrese su edad: ");
-        string edadInput = Console.ReadLine();
-        int Edad;
-
-        // Intentar convertir la edad a un número entero
-        while (!int.TryParse(edadInput, out Edad))
-        {
-            Console.WriteLine("Por favor, ingrese una edad válida.");
-            edadInput = Console.ReadLine();
-        }
-        */
         c = new Cliente("801100976", "miriam", 20);
-        /*
-        Console.Clear();
-        c.MostrarInformacion(); // Muestra la información del cliente después de crearlo
-       
-        Console.WriteLine("Informacion ingresada con exito.");
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
-        Console.Clear();
-        */
     }
 
-
-
-
-    //Console.Clear();
     Console.WriteLine("Seleccione una opción:");
     Console.WriteLine("1. Publicar mensaje");
     Console.WriteLine("2. Suscribirse a un tema");
@@ -67,7 +34,7 @@ while (true)
 
     if (option == "1")
     {
-        await PublicarMensajeMenu(client,c.Id);
+        await PublicarMensajeMenu(client, c.Id);
     }
     else if (option == "2")
     {
@@ -79,18 +46,7 @@ while (true)
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client,String id)
+async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client, String id)
 {
     while (true)
     {
@@ -104,24 +60,20 @@ async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client,String i
 
         if (option == "1")
         {
-            await PublishMessage(client ,id);
+            await PublishMessage(client, id);
         }
         else if (option == "2")
         {
-            ListarTemas();
+            await ListarTemas(client);
         }
         else if (option == "3")
         {
             break;
-
         }
     }
 }
 
-
-
-
-async Task PublishMessage(MessageBroker.MessageBrokerClient client , String id)
+async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 {
     Console.Clear();
     Console.WriteLine("Ingrese el tema:");
@@ -129,28 +81,23 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client , String id)
     Console.WriteLine("Ingrese el mensaje:");
     var message = Console.ReadLine();
 
-    var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message , IdPublish = id});
-
-  
+    var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
 
     Console.WriteLine("Respuesta del servidor: " + reply.Status);
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();
 }
 
-
-
-
-
-
-
-
-
-
-void ListarTemas()
+async Task ListarTemas(MessageBroker.MessageBrokerClient client)
 {
     Console.Clear();
     Console.WriteLine("Temas existentes:");
+
+    var response = await client.GetTopicsAsync(new Empty());
+
+
+    temas = new List<string>(response.Topics);
+
     foreach (var tema in temas)
     {
         Console.WriteLine(tema);
@@ -182,7 +129,7 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
         }
         else if (option == "3")
         {
-            ListarSuscripcionesDisponibles();
+            await ListarTemas(client);
         }
         else if (option == "4")
         {
@@ -193,6 +140,8 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
 
 async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
 {
+    await ListarTemas(client);
+
     Console.Clear();
     Console.WriteLine("Ingrese el tema:");
     var topic = Console.ReadLine();
@@ -235,18 +184,6 @@ void ListarMisSuscripciones()
     foreach (var suscripcion in suscripciones)
     {
         Console.WriteLine(suscripcion);
-    }
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
-}
-
-void ListarSuscripcionesDisponibles()
-{
-    Console.Clear();
-    Console.WriteLine("Suscripciones disponibles:");
-    foreach (var tema in temas)
-    {
-        Console.WriteLine(tema);
     }
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();

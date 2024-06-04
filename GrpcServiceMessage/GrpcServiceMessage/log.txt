@@ -11,3 +11,30 @@
 02/06/2024:21:55:20 Cliente suscrito al tema hola
 02/06/2024:21:55:28 Cliente desconectado del tema hola
 03/06/2024:02:35:15 Mensaje publicado en el tema ff
+03/06/2024:13:02:08 Mensaje publicado en el tema hola
+03/06/2024:13:27:33 Mensaje publicado en el tema cliente 1
+03/06/2024:13:27:43 Mensaje publicado en el tema cliente 2
+03/06/2024:16:18:04 Mensaje publicado en el tema 55
+03/06/2024:16:18:16 Mensaje publicado en el tema 66
+03/06/2024:16:41:50 Lista de temas enviada al cliente
+03/06/2024:16:42:27 Mensaje publicado en el tema publicacion_1
+03/06/2024:16:42:33 Lista de temas enviada al cliente
+03/06/2024:16:42:39 Lista de temas enviada al cliente
+03/06/2024:16:42:52 Lista de temas enviada al cliente
+03/06/2024:16:45:06 Mensaje publicado en el tema publica_1
+03/06/2024:17:13:44 Mensaje publicado en el tema hola
+03/06/2024:17:37:23 Mensaje publicado en el tema tema1
+03/06/2024:17:38:38 Lista de temas enviada al cliente
+03/06/2024:18:05:01 Mensaje publicado en el tema hola
+03/06/2024:18:54:16 Lista de temas enviada al cliente
+03/06/2024:18:54:24 Cliente suscrito al tema hola
+03/06/2024:18:54:32 Cliente desconectado del tema hola
+03/06/2024:18:55:36 Lista de temas enviada al cliente
+03/06/2024:18:57:16 Lista de temas enviada al cliente
+03/06/2024:18:57:25 Cliente suscrito al tema hola
+03/06/2024:18:57:54 Cliente desconectado del tema hola
+03/06/2024:18:58:19 Lista de temas enviada al cliente
+03/06/2024:19:00:02 Cliente suscrito al tema hola
+03/06/2024:19:01:17 Cliente desconectado del tema hola
+03/06/2024:19:01:26 Lista de temas enviada al cliente
+03/06/2024:19:26:59 Lista de temas enviada al cliente

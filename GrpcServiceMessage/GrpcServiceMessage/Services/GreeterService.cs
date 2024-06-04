@@ -6,45 +6,86 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading.Tasks;
 
-using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using System;
 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
+using GrpcServiceMessage.Class;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace GrpcServiceMessage.Services
 {
     public class MessageBrokerService : MessageBroker.MessageBrokerBase
     {
         private readonly ILogger<MessageBrokerService> _logger;
-        private readonly ConcurrentDictionary<string, ConcurrentQueue<string>> _topics = new();
+        private readonly ConcurrentDictionary<string, List<string>> _topics = new();
+        List<string> topics = new List<string>();
+
+        Topic topic1 = new Topic(12, "carro", "blanco");
+        Topic topic2 = new Topic(13, "cerdo", "blanco");
+        Topic topic3 = new Topic(14, "dinero", "blanco");
+        Topic topic4 = new Topic(15, "gatos", "blanco");
+
+        List<Topic> lista_topic = new List<Topic>();
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private readonly ConcurrentDictionary<string, ConcurrentBag<IServerStreamWriter<Message>>> _subscribers = new();
         private readonly object _logLock = new();
 
         public MessageBrokerService(ILogger<MessageBrokerService> logger)
         {
             _logger = logger;
-        }
 
+            lista_topic.Add(topic1);
+            lista_topic.Add(topic2);
+            lista_topic.Add(topic3);
+            lista_topic.Add(topic4);
+
+
+        }
 
         public override Task<PublishReply> Publish(PublishRequest request, ServerCallContext context)
         {
-            /*
-            var queue = _topics.GetOrAdd(request.Topic, new ConcurrentQueue<string>());
-            queue.Enqueue(request.Message);
+            var messages = _topics.GetOrAdd(request.Topic, new List<string>());
+
+            lock (messages)
+            {
+                messages.Add(request.Message);
+            }
 
             LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
 
+            topics.Add(request.Topic);
+
             NotifySubscribers(request.Topic, request.Message);
-            */
-             Console.WriteLine(request.Message);
-            Console.WriteLine(request.Topic);
-            Console.WriteLine(request.IdPublish);
-
-
-
-             LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
 
             return Task.FromResult(new PublishReply { Status = "publicacion guardada" });
         }
-
 
 
 
@@ -58,16 +99,17 @@ namespace GrpcServiceMessage.Services
                     {
                         try
                         {
-                          
-                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al subscriptor del tema {topic}");
+                            await subscriber.WriteAsync(new Message { Topic = topic, Message_ = message });
+                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al suscriptor del tema {topic}");
                         }
                         catch (Exception ex)
                         {
-                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al subscriptor del tema {topic}: {ex.Message}");
+                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al suscriptor del tema {topic}: {ex.Message}");
                         }
                     });
                 }
             }
+            
         }
 
 
@@ -80,7 +122,7 @@ namespace GrpcServiceMessage.Services
 
             try
             {
-                await Task.Delay(Timeout.Infinite, context.CancellationToken); // Keep the subscription alive
+                await Task.Delay(Timeout.Infinite, context.CancellationToken); // Mantener la suscripción activa
             }
             catch (TaskCanceledException)
             {
@@ -88,9 +130,39 @@ namespace GrpcServiceMessage.Services
             }
             finally
             {
-                // Remove the subscriber when the connection is closed
+                // Remover el suscriptor cuando se cierre la conexión
                 subscribers.TryTake(out responseStream);
             }
+        }
+
+        public override Task<TopicList> GetTopics(Empty request, ServerCallContext context)
+        {
+          
+        
+
+
+
+            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Lista de temas enviada al cliente");
+
+
+
+            var reply=new TopicList();
+
+            var p = new List<String>();
+
+
+            foreach (var tema in lista_topic)
+            {
+                p.Add(tema.Nombre);
+            }
+
+
+            reply.Topics.AddRange(p);
+
+
+            return Task.FromResult(reply) ;
+
+
         }
 
 
@@ -103,3 +175,4 @@ namespace GrpcServiceMessage.Services
         }
     }
 }
+
