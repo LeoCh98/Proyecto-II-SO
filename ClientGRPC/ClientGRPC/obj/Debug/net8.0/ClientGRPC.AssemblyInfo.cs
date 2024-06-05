@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClientGRPC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75d90a011f3bc26fb83842bca9e0c489ee586a2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bafffea6ecb12ade81051c4fb31e7e6a70ffad4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClientGRPC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClientGRPC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

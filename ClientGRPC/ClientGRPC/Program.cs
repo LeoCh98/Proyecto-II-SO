@@ -10,19 +10,20 @@ using System.Threading.Tasks;
 
 List<string> temas = new List<string>(); // Lista para almacenar los temas
 List<string> suscripciones = new List<string>(); // Lista para almacenar las suscripciones del usuario
+List<string> suscripciones_Plublisher = new List<string>(); // Lista para almacenar las suscripciones del usuario
 
 using var channel = GrpcChannel.ForAddress("http://localhost:5238");
 var client = new MessageBroker.MessageBrokerClient(channel);
 
 var cts = new CancellationTokenSource();
 
-Cliente c = null;
+Cliente cliente_1 = null;
 
 while (true)
 {
-    if (c == null)
+    if (cliente_1 == null)
     {
-        c = new Cliente("801100976", "miriam", 20);
+        cliente_1 = new Cliente("801100976", "miriam", 20);
     }
 
     Console.WriteLine("Seleccione una opción:");
@@ -30,11 +31,12 @@ while (true)
     Console.WriteLine("2. Suscribirse a un tema");
     Console.WriteLine("3. Salir");
 
+
     var option = Console.ReadLine();
 
     if (option == "1")
     {
-        await PublicarMensajeMenu(client, c.Id);
+        await Menublisher(client, cliente_1.Id);
     }
     else if (option == "2")
     {
@@ -46,7 +48,7 @@ while (true)
     }
 }
 
-async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client, String id)
+async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
 {
     while (true)
     {
@@ -54,7 +56,11 @@ async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client, String 
         Console.WriteLine("Menú Publicar Mensaje:");
         Console.WriteLine("1. Escribir mensaje");
         Console.WriteLine("2. Ver temas existentes");
-        Console.WriteLine("3. Volver al menú principal");
+        Console.WriteLine("3. Subcribirse como productor");
+        Console.WriteLine("4. Volver al menú principal");
+
+    
+
 
         var option = Console.ReadLine();
 
@@ -68,10 +74,17 @@ async Task PublicarMensajeMenu(MessageBroker.MessageBrokerClient client, String 
         }
         else if (option == "3")
         {
+            await Subcribe_Publisher_Topic(client);
+        }
+
+        else if (option == "4")
+        {
             break;
         }
     }
 }
+
+
 
 async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
 {
@@ -102,8 +115,18 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
         {
             break;
         }
+        else
+        {
+
+            Console.WriteLine("ERROR DIGITE OTRO NUMERO");
+        }
     }
 }
+
+
+
+
+
 
 
 
@@ -127,16 +150,14 @@ async Task ListarTemas(MessageBroker.MessageBrokerClient client)
     Console.ReadKey();
 }
 
-
-
 async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 {
     await ListarTemas(client);
 
-
     Console.WriteLine("Ingrese el tema:");
     var topic = Console.ReadLine();
     Console.Clear();
+
     if (!temas.Contains(topic))
     {
         Console.WriteLine("El tema no existe.");
@@ -147,11 +168,30 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 
     Console.Clear();
 
+    var response = await client.SubscribeAsync(new ClientRequest
+    {
+        Id = cliente_1.Id,
+        Nombre = cliente_1.Nombre,
+        Edad = cliente_1.Edad,
+        Suscritor = topic,
+        SuscritorPublish = "NONE",
+        Topic = topic
+    });
+    
 
+    if(response.Nombre== "REGISTRADO")
+    {
+        suscripciones.Add(topic);
+        Console.WriteLine("Suscrito al tema: " + topic);
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
 
-
-    var response = await client.SubscribeAsync(new SubscribeRequest { Topic = topic });
-
+    }
+    else if (response.Nombre == "YA SUSCRITO")
+    {
+        Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
+        Console.ReadKey();
+    }
 
 
 
@@ -162,26 +202,59 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
         Console.WriteLine("Presione una tecla para continuar...");
         Console.ReadKey();
     }
-
-    if (suscripciones.Contains(topic))
+    else
     {
         Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
+        Console.ReadKey();
     }
+
 
 }
 
 
 
+async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
+{
+    await ListarTemas(client);
+
+    Console.WriteLine("Ingrese el tema:");
+    var topic = Console.ReadLine();
+    Console.Clear();
+
+    if (!temas.Contains(topic))
+    {
+        Console.WriteLine("El tema no existe.");
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
+        return;
+    }
+
+    var response = await client.Subscribe_publisherAsync(new ClientRequest
+    {
+        Id = cliente_1.Id,
+        Nombre = cliente_1.Nombre,
+        Edad = cliente_1.Edad,
+        Suscritor = topic,
+        SuscritorPublish = topic,
+        Topic = topic
+    });
 
 
+    if (response.Message_ == "PUBLISHER REGISTRADO")
+    {
+        suscripciones.Add(topic);
+        Console.WriteLine("Suscrito al tema: " + topic);
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
 
+    }
+    else if (response.Message_ == "YA SUSCRITO COMO PUBLISHER")
+    {
+        Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
+        Console.ReadKey();
+    }
 
-
-
-
-
-
-
+}
 
 
 
@@ -200,10 +273,6 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();
 }
-
-
-
-
 
 
 

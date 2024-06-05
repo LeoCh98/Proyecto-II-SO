@@ -4,8 +4,9 @@ option csharp_namespace = "GrpcServiceMessage";
 
 service MessageBroker {
     rpc Publish(PublishRequest) returns (PublishReply);
-    rpc Subscribe(SubscribeRequest) returns ( Message);
+    rpc Subscribe(ClientRequest) returns ( Message);
     rpc GetTopics (Empty) returns (TopicList);
+    rpc Subscribe_publisher (ClientRequest) returns (Message);
 }
 
 message PublishRequest {
@@ -31,4 +32,15 @@ message Empty {}
 
 message TopicList {
     repeated string topics = 1;
+}
+
+
+message ClientRequest{
+
+        string Id = 1;
+        string Nombre = 2;
+        int32  Edad = 3;
+        string suscritor=4;
+        string suscritorPublish=5;
+        string Topic=6;
 }

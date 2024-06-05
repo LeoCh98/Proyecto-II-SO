@@ -8,7 +8,6 @@ namespace ClientGRPC
 {
     public class Cliente
     {
-       
         public string Id { get; set; }
         public string Nombre { get; set; }
         public int Edad { get; set; }
@@ -18,11 +17,16 @@ namespace ClientGRPC
 
 
 
-        public Cliente(string id, string nombre, int edad)
+        public Cliente()
+        {
+        }
+            public Cliente(string id, string nombre, int edad)
         {
             Id = id;
             Nombre = nombre;
             Edad = edad;
+            TopicsPublish = new List<string>();
+            TopicsSubscritos = new List<string>();
         }
 
         // Método para mostrar la información del cliente
@@ -46,8 +50,5 @@ namespace ClientGRPC
         {
             TopicsPublish.Add(topic);
         }
-
-
-
     }
 }
