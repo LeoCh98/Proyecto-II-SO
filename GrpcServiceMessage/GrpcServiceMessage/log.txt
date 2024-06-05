@@ -1,0 +1,116 @@
+01/06/2024:23:47:30 Mensaje publicado en el tema hola
+01/06/2024:23:47:48 Cliente suscrito al tema hola
+01/06/2024:23:49:26 Cliente suscrito al tema perro
+01/06/2024:23:49:31 Cliente desconectado del tema perro
+01/06/2024:23:49:51 Mensaje publicado en el tema carro
+02/06/2024:00:52:49 Cliente desconectado del tema hola
+02/06/2024:17:02:58 Mensaje publicado en el tema hola
+02/06/2024:17:23:30 Mensaje publicado en el tema perro
+02/06/2024:17:24:05 Mensaje publicado en el tema f
+02/06/2024:19:56:11 Mensaje publicado en el tema hola
+02/06/2024:21:55:20 Cliente suscrito al tema hola
+02/06/2024:21:55:28 Cliente desconectado del tema hola
+03/06/2024:02:35:15 Mensaje publicado en el tema ff
+03/06/2024:13:02:08 Mensaje publicado en el tema hola
+03/06/2024:13:27:33 Mensaje publicado en el tema cliente 1
+03/06/2024:13:27:43 Mensaje publicado en el tema cliente 2
+03/06/2024:16:18:04 Mensaje publicado en el tema 55
+03/06/2024:16:18:16 Mensaje publicado en el tema 66
+03/06/2024:16:41:50 Lista de temas enviada al cliente
+03/06/2024:16:42:27 Mensaje publicado en el tema publicacion_1
+03/06/2024:16:42:33 Lista de temas enviada al cliente
+03/06/2024:16:42:39 Lista de temas enviada al cliente
+03/06/2024:16:42:52 Lista de temas enviada al cliente
+03/06/2024:16:45:06 Mensaje publicado en el tema publica_1
+03/06/2024:17:13:44 Mensaje publicado en el tema hola
+03/06/2024:17:37:23 Mensaje publicado en el tema tema1
+03/06/2024:17:38:38 Lista de temas enviada al cliente
+03/06/2024:18:05:01 Mensaje publicado en el tema hola
+03/06/2024:18:54:16 Lista de temas enviada al cliente
+03/06/2024:18:54:24 Cliente suscrito al tema hola
+03/06/2024:18:54:32 Cliente desconectado del tema hola
+03/06/2024:18:55:36 Lista de temas enviada al cliente
+03/06/2024:18:57:16 Lista de temas enviada al cliente
+03/06/2024:18:57:25 Cliente suscrito al tema hola
+03/06/2024:18:57:54 Cliente desconectado del tema hola
+03/06/2024:18:58:19 Lista de temas enviada al cliente
+03/06/2024:19:00:02 Cliente suscrito al tema hola
+03/06/2024:19:01:17 Cliente desconectado del tema hola
+03/06/2024:19:01:26 Lista de temas enviada al cliente
+03/06/2024:19:26:59 Lista de temas enviada al cliente
+03/06/2024:22:56:49 Lista de temas enviada al cliente
+03/06/2024:23:00:08 Lista de temas enviada al cliente
+03/06/2024:23:01:15 Lista de temas enviada al cliente
+03/06/2024:23:01:33 Lista de temas enviada al cliente
+03/06/2024:23:03:43 Lista de temas enviada al cliente
+03/06/2024:23:54:06 Lista de temas enviada al cliente
+03/06/2024:23:54:10 Lista de temas enviada al cliente
+03/06/2024:23:54:26 Lista de temas enviada al cliente
+03/06/2024:23:55:36 Lista de temas enviada al cliente
+03/06/2024:23:56:55 Lista de temas enviada al cliente
+04/06/2024:00:39:29 Lista de temas enviada al cliente
+04/06/2024:00:53:19 Lista de temas enviada al cliente
+04/06/2024:00:58:42 Lista de temas enviada al cliente
+04/06/2024:00:58:51 Lista de temas enviada al cliente
+04/06/2024:00:58:59 Lista de temas enviada al cliente
+04/06/2024:01:00:25 Lista de temas enviada al cliente
+04/06/2024:01:00:32 Lista de temas enviada al cliente
+04/06/2024:01:02:07 Lista de temas enviada al cliente
+04/06/2024:01:02:24 Lista de temas enviada al cliente
+04/06/2024:01:04:44 Lista de temas enviada al cliente
+04/06/2024:01:06:04 Lista de temas enviada al cliente
+04/06/2024:01:06:09 Lista de temas enviada al cliente
+04/06/2024:01:06:14 Lista de temas enviada al cliente
+04/06/2024:01:06:23 Lista de temas enviada al cliente
+04/06/2024:01:06:28 Lista de temas enviada al cliente
+04/06/2024:18:09:14 Lista de temas enviada al cliente
+04/06/2024:18:09:33 Lista de temas enviada al cliente
+04/06/2024:18:09:44 Lista de temas enviada al cliente
+04/06/2024:19:03:40 Lista de temas enviada al cliente
+04/06/2024:19:14:34 Lista de temas enviada al cliente
+05/06/2024:00:54:40 Lista de temas enviada al cliente
+05/06/2024:00:57:32 Lista de temas enviada al cliente
+05/06/2024:01:00:18 Lista de temas enviada al cliente
+05/06/2024:01:00:44 Lista de temas enviada al cliente
+05/06/2024:01:10:31 Lista de temas enviada al cliente
+05/06/2024:01:10:47 Lista de temas enviada al cliente
+05/06/2024:01:12:08 Lista de temas enviada al cliente
+05/06/2024:01:12:48 Lista de temas enviada al cliente
+05/06/2024:01:17:13 Lista de temas enviada al cliente
+05/06/2024:01:18:00 Lista de temas enviada al cliente
+05/06/2024:01:22:12 Lista de temas enviada al cliente
+05/06/2024:01:23:33 Lista de temas enviada al cliente
+05/06/2024:01:25:35 Lista de temas enviada al cliente
+05/06/2024:01:25:56 Lista de temas enviada al cliente
+05/06/2024:01:31:11 Lista de temas enviada al cliente
+05/06/2024:01:33:21 Lista de temas enviada al cliente
+05/06/2024:01:34:56 Lista de temas enviada al cliente
+05/06/2024:01:35:59 Lista de temas enviada al cliente
+05/06/2024:01:43:05 Lista de temas enviada al cliente
+05/06/2024:01:43:30 Lista de temas enviada al cliente
+05/06/2024:01:45:30 Lista de temas enviada al cliente
+05/06/2024:01:48:44 Lista de temas enviada al cliente
+05/06/2024:01:49:41 Lista de temas enviada al cliente
+05/06/2024:01:53:34 Lista de temas enviada al cliente
+05/06/2024:01:54:12 Lista de temas enviada al cliente
+05/06/2024:01:59:26 Lista de temas enviada al cliente
+05/06/2024:01:59:47 Lista de temas enviada al cliente
+05/06/2024:02:00:07 Lista de temas enviada al cliente
+05/06/2024:02:03:00 Lista de temas enviada al cliente
+05/06/2024:02:03:10 Lista de temas enviada al cliente
+05/06/2024:02:04:16 Lista de temas enviada al cliente
+05/06/2024:02:04:36 Lista de temas enviada al cliente
+05/06/2024:02:06:22 Lista de temas enviada al cliente
+05/06/2024:02:07:50 Lista de temas enviada al cliente
+05/06/2024:02:13:57 Lista de temas enviada al cliente
+05/06/2024:02:14:30 Lista de temas enviada al cliente
+05/06/2024:02:16:13 Lista de temas enviada al cliente
+05/06/2024:02:16:55 Lista de temas enviada al cliente
+05/06/2024:02:19:30 Lista de temas enviada al cliente
+05/06/2024:02:21:28 Lista de temas enviada al cliente
+05/06/2024:02:28:42 Lista de temas enviada al cliente
+05/06/2024:02:39:05 Lista de temas enviada al cliente
+05/06/2024:02:43:42 Lista de temas enviada al cliente
+05/06/2024:03:14:10 Lista de temas enviada al cliente
+05/06/2024:03:18:03 Lista de temas enviada al cliente
+05/06/2024:03:20:52 Lista de temas enviada al cliente
