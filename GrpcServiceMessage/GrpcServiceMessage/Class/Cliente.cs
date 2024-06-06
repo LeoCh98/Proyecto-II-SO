@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Grpc.Core;
+using GrpcServiceMessage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,10 @@ namespace ClientGRPC
         public List<string> TopicsSubscritos { get; set; } // Lista de temas a los que está suscrito el cliente
         public List<string> TopicsPublish { get; set; } // Lista de temas a los que está suscrito el cliente
 
+        public AsyncServerStreamingCall<Message> Stream { get; set; }
+
+
+        public List<string> ColaDeTemas { get; set; } 
 
 
         public Cliente()
@@ -27,6 +33,9 @@ namespace ClientGRPC
             Edad = edad;
             TopicsPublish = new List<string>();
             TopicsSubscritos = new List<string>();
+            ColaDeTemas =new List<string>();
+
+
         }
 
         // Método para mostrar la información del cliente
@@ -50,5 +59,16 @@ namespace ClientGRPC
         {
             TopicsPublish.Add(topic);
         }
+
+        public  void IngresarTema(string tema)
+        {
+            ColaDeTemas.Add(tema);
+        }
+
+        public List<String> ObtenerColaDeTemas()
+        {
+            return ColaDeTemas;
+        }
+
     }
 }

@@ -4,7 +4,9 @@ using Grpc.Net.Client;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
+using static ClientGRPC.MessageBroker;
 
 List<string> temas = new List<string>(); // Lista para almacenar los temas
 List<string> suscripciones = new List<string>(); // Lista para almacenar las suscripciones del usuario
@@ -16,6 +18,8 @@ var client = new MessageBroker.MessageBrokerClient(channel);
 var cts = new CancellationTokenSource();
 
 Cliente cliente_1 = null;
+
+
 
 while (true)
 {
@@ -43,7 +47,7 @@ while (true)
     else if (option == "3")
     {
         var request = new ClientRequest { Topic = "CONECTADO" };
-        await ReceiveMessages(client, request);
+        await RecibirMensajes(cliente_1.Id, client);
     }
     else if (option == "4")
     {
@@ -159,51 +163,25 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
     var topic = Console.ReadLine();
     Console.Clear();
 
-    if (!temas.Contains(topic))
-    {
-        Console.WriteLine("El tema no existe.");
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
-        return;
-    }
 
-    Console.Clear();
-
-    var response = await client.Subcribirse_ClienteAsync(new ClientRequest
+    var request = new ClientRequest
     {
         Id = cliente_1.Id,
         Nombre = cliente_1.Nombre,
         Edad = cliente_1.Edad,
         Suscritor = topic,
-        SuscritorPublish = "NONE",
+        SuscritorPublish = topic,
         Topic = topic
-    });
+    };
 
-    if (response.Message_ == "REGISTRADO")
-    {
-        suscripciones.Add(topic);
-        Console.WriteLine("Suscrito al tema: " + topic);
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
-    }
-    else if (response.Message_ == "YA SUSCRITO")
-    {
-        Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
-        Console.ReadKey();
-    }
+    var response = await client.Subcribirse_ClienteAsync(request);
 
-    if (!suscripciones.Contains(topic))
-    {
-        suscripciones.Add(topic);
-        Console.WriteLine("Suscrito al tema: " + topic);
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
-    }
-    else
-    {
-        Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
-        Console.ReadKey();
-    }
+
+    Console.WriteLine(response.Content);
+    Console.ReadKey();
+
+
+
 }
 
 async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
@@ -249,6 +227,7 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 //-------------------------------------------MENSAJE------------------------------------------
 
 
+
 async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 {
     Console.Clear();
@@ -256,6 +235,8 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
     var topic = Console.ReadLine();
     Console.WriteLine("Ingrese el mensaje:");
     var message = Console.ReadLine();
+
+
 
     var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
 
@@ -269,53 +250,43 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 
 
 
-    Console.WriteLine("Respuesta del servidor: " + reply.Status);
+    Console.WriteLine("Respuesta del servidor: " + reply.Content);
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();
 }
 
 
 
-async Task ReceiveMessages(MessageBroker.MessageBrokerClient client,ClientRequest request)
+
+
+async Task RecibirMensajes(string client_ID, MessageBroker.MessageBrokerClient client)
 {
-    Console.Clear();
-    Console.WriteLine("Seleccione el tema del cual desea recibir mensajes:");
+    // Crea una solicitud para recibir mensajes
+    var request = new ClientRequest { Id = client_ID };
 
-    ListarMisSuscripciones();
-
-
-
-    // Crea una solicitud para suscribirse a un tema
-  
-
-    // Establece un token de cancelación para detener la suscripción (opcional)
-    var cts = new CancellationTokenSource();
-
-
-    while (true)
+    try
     {
-        try
-        {
-            await foreach (var message in client.SubscribeToTopic(request).ResponseStream.ReadAllAsync())
+        // Abre un canal de comunicación para recibir mensajes del servidor
+        using (var call = client.Enviar(request))
+        
+            // Lee continuamente mensajes del servidor
+            await foreach (var message in call.ResponseStream.ReadAllAsync())
             {
-                Console.WriteLine("Mensaje recibido: " + message.Content);
+                Console.WriteLine($"Mensaje recibido: {message.Content}");
             }
-        }
-        catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)
-        {
-            // El flujo se ha cerrado, probablemente debido a un error del servidor o cierre de conexión.
-            // Puedes volver a suscribirte al flujo para seguir escuchando.
-            Console.WriteLine("El flujo se ha cerrado. Volviendo a suscribirse al flujo...");
-
-            // Aquí puedes implementar la lógica para volver a suscribirte al flujo, por ejemplo, llamando a SubscribeToTopic nuevamente.
-        }
+        
     }
-
-
-    // Espera hasta que el usuario presione una tecla para salir
-    Console.WriteLine("Presione una tecla para salir...");
-    Console.ReadKey();
+    catch (RpcException ex)
+    {
+        Console.WriteLine($"Error al recibir mensajes del servidor: {ex.Status.Detail}");
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine($"Error al recibir mensajes del servidor: {ex}");
+    }
 }
+
+
 
 
 

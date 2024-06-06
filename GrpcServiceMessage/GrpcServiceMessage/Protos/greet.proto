@@ -3,11 +3,18 @@ syntax = "proto3";
 option csharp_namespace = "GrpcServiceMessage";
 
 service MessageBroker {
-    rpc Publish(PublishRequest) returns (PublishReply);
+
+
+    rpc Publish(PublishRequest) returns (stream Message);
+
     rpc GetTopics (Empty) returns (TopicList);
     rpc Subscribe_publisher (ClientRequest) returns (Message);
     rpc SubscribeToTopic(ClientRequest) returns (stream Message);
-    rpc Subcribirse_Cliente (ClientRequest) returns (Message);
+
+
+    rpc Enviar (ClientRequest) returns (stream Message);
+
+    rpc Subcribirse_Cliente (ClientRequest) returns (stream Message);
 
     rpc Subscribe_prueba(ClientRequest) returns (stream ClientRequest);
 
