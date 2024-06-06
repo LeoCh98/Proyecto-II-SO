@@ -42,7 +42,8 @@ while (true)
     }
     else if (option == "3")
     {
-        await ReceiveMessages(client);
+        var request = new ClientRequest { Topic = "CONECTADO" };
+        await ReceiveMessages(client, request);
     }
     else if (option == "4")
     {
@@ -168,7 +169,7 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 
     Console.Clear();
 
-    var response = await client.SubscribeAsync(new ClientRequest
+    var response = await client.Subcribirse_ClienteAsync(new ClientRequest
     {
         Id = cliente_1.Id,
         Nombre = cliente_1.Nombre,
@@ -178,14 +179,14 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
         Topic = topic
     });
 
-    if (response.Nombre == "REGISTRADO")
+    if (response.Message_ == "REGISTRADO")
     {
         suscripciones.Add(topic);
         Console.WriteLine("Suscrito al tema: " + topic);
         Console.WriteLine("Presione una tecla para continuar...");
         Console.ReadKey();
     }
-    else if (response.Nombre == "YA SUSCRITO")
+    else if (response.Message_ == "YA SUSCRITO")
     {
         Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
         Console.ReadKey();
@@ -258,6 +259,16 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 
     var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
 
+
+
+
+    var prueba = new ClientRequest { Topic = topic };
+
+    using var call = client.SubscribeToTopic(prueba);
+
+
+
+
     Console.WriteLine("Respuesta del servidor: " + reply.Status);
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();
@@ -265,7 +276,7 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 
 
 
-async Task ReceiveMessages(MessageBroker.MessageBrokerClient client)
+async Task ReceiveMessages(MessageBroker.MessageBrokerClient client,ClientRequest request)
 {
     Console.Clear();
     Console.WriteLine("Seleccione el tema del cual desea recibir mensajes:");
@@ -275,19 +286,31 @@ async Task ReceiveMessages(MessageBroker.MessageBrokerClient client)
 
 
     // Crea una solicitud para suscribirse a un tema
-    var request = new ClientRequest { Topic = "mi_tema" };
+  
 
     // Establece un token de cancelación para detener la suscripción (opcional)
     var cts = new CancellationTokenSource();
 
-    // Establece un flujo de streaming para recibir mensajes del servidor
-    using var call = client.SubscribeToTopic(request);
 
-    // Lee los mensajes del flujo de streaming continuamente
-    await foreach (var message in call.ResponseStream.ReadAllAsync())
+    while (true)
     {
-        Console.WriteLine("Mensaje recibido: " + message.Content);
+        try
+        {
+            await foreach (var message in client.SubscribeToTopic(request).ResponseStream.ReadAllAsync())
+            {
+                Console.WriteLine("Mensaje recibido: " + message.Content);
+            }
+        }
+        catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)
+        {
+            // El flujo se ha cerrado, probablemente debido a un error del servidor o cierre de conexión.
+            // Puedes volver a suscribirte al flujo para seguir escuchando.
+            Console.WriteLine("El flujo se ha cerrado. Volviendo a suscribirse al flujo...");
+
+            // Aquí puedes implementar la lógica para volver a suscribirte al flujo, por ejemplo, llamando a SubscribeToTopic nuevamente.
+        }
     }
+
 
     // Espera hasta que el usuario presione una tecla para salir
     Console.WriteLine("Presione una tecla para salir...");

@@ -21,7 +21,9 @@ namespace GrpcServiceMessage.Services
         private readonly ConcurrentDictionary<string, Cliente> listaClientes = new();
         private readonly List<Topic> lista_topic = new List<Topic>();
         private readonly object _logLock = new();
-       
+        private readonly ConcurrentDictionary<string, IServerStreamWriter<ClientRequest>> _clientStreams = new ConcurrentDictionary<string, IServerStreamWriter<ClientRequest>>();
+
+
 
         public MessageBrokerService(ILogger<MessageBrokerService> logger)
         {
@@ -130,6 +132,86 @@ namespace GrpcServiceMessage.Services
 
         }
 
+
+
+
+        public override Task<Message> Subcribirse_Cliente(ClientRequest request, ServerCallContext context)
+        {
+            // Buscar el tema solicitado en la lista de temas
+            var tema = lista_topic.FirstOrDefault(t => t.Nombre == request.Topic);
+
+            if (tema != null)
+            {
+                // Buscar el cliente en la lista de clientes suscritos
+                if (listaClientes.TryGetValue(request.Id, out var cliente))
+                {
+                    // Verificar si el cliente ya está suscrito al tema
+                    if (cliente.TopicsSubscritos.Contains(tema.Nombre))
+                    {
+                        return Task.FromResult(new Message
+                        {
+                            Topic = tema.Nombre,
+                            Message_ = "YA SUSCRITO",
+                            Content = tema.Descripcion
+                        });
+                    }
+                    else
+                    {
+                        // Agregar el tema a la lista de temas suscritos del cliente
+                        cliente.IngresarTopicsSubscritos(tema.Nombre);
+
+                        Console.WriteLine($"Cliente actualizado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
+
+                        return Task.FromResult(new Message
+                        {
+                            Topic = tema.Nombre,
+                            Message_ = "REGISTRADO",
+                            Content = tema.Descripcion
+                        });
+                    }
+                }
+                else
+                {
+                    // Crear un nuevo cliente y registrar el tema al que se suscribe
+                    cliente = new Cliente(request.Id, request.Nombre, request.Edad);
+                    cliente.IngresarTopicsSubscritos(tema.Nombre);
+                    listaClientes.TryAdd(request.Id, cliente);
+
+
+
+                    
+
+
+                    Console.WriteLine($"Nuevo cliente agregado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
+
+                    return Task.FromResult(new Message
+                    {
+                        Topic = tema.Nombre,
+                        Message_ = "REGISTRADO",
+                        Content = tema.Descripcion
+                    });
+                }
+            }
+            else
+            {
+                // Retornar un mensaje vacío indicando que el tema no fue encontrado
+                return Task.FromResult(new Message
+                {
+                    Topic = string.Empty,
+                    Message_ = "TEMA NO ENCONTRADO",
+                    Content = string.Empty
+                });
+            }
+        }
+
+
+        public override async Task Subscribe_prueba(ClientRequest request, IServerStreamWriter<ClientRequest> responseStream, ServerCallContext context)
+        {
+            _clientStreams.TryAdd(request.Id, responseStream);
+
+        }
+
+
         //-----------------------------------------------------------------------------
 
         public override Task<PublishReply> Publish(PublishRequest request, ServerCallContext context)
@@ -179,30 +261,36 @@ namespace GrpcServiceMessage.Services
 
 
 
-        private void NotifySubscribers(string topic, string message)
-
+        private async Task NotifySubscribers(string topic, string message)
         {
-            var cts = new CancellationTokenSource();
-          
-
-            foreach (var subscriber in listaClientes)
+            foreach (var cliente in listaClientes.Values)
             {
-                _ = Task.Run(async () =>
+                if (cliente.TopicsSubscritos.Contains(topic))
                 {
-                    try
+                    // Verificar si el cliente tiene un flujo de respuesta asociado
+                    if (listaClientes.TryGetValue(cliente.Id, out var clientStream))
                     {
-                        var RT = new Message { Content = "Mensaje de ejemplo" };
-                   
-                        LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al suscriptor del tema {topic}");
-                    }
-                    catch (Exception ex)
-                    {
-                        LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al suscriptor del tema {topic}: {ex.Message}");
-                    }
-                });
-            }
+                        try
+                        {
+                            // Crear el mensaje con el contenido y enviarlo al cliente
+                            var msg = new Message { Topic = topic, Content = message };
+                          
 
+                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al cliente {cliente.Nombre} suscrito al tema {topic}");
+                        }
+                        catch (Exception ex)
+                        {
+                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al cliente {cliente.Nombre} suscrito al tema {topic}: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} El cliente {cliente.Nombre} suscrito al tema {topic} no tiene un flujo de respuesta asociado.");
+                    }
+                }
+            }
         }
+
 
 
 
@@ -225,8 +313,7 @@ namespace GrpcServiceMessage.Services
         public override async Task SubscribeToTopic(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
             // Aquí puedes implementar la lógica para enviar mensajes continuamente al cliente
-            while (!context.CancellationToken.IsCancellationRequested)
-            {
+         
                 // Supongamos que generamos un mensaje de ejemplo
                 var message = new Message { Content = request.Topic };
 
@@ -235,7 +322,7 @@ namespace GrpcServiceMessage.Services
 
                 // Simulamos un intervalo de tiempo entre mensajes
                 await Task.Delay(1000); // Espera 1 segundo antes de enviar el próximo mensaje
-            }
+            
         }
 
 

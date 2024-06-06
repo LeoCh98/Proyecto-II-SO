@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using GrpcServiceMessage.Services;
 
 public class Program
@@ -11,6 +14,10 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
+                webBuilder.ConfigureKestrel(options =>
+                {
+                    options.ListenAnyIP(5238); // Configurar Kestrel para escuchar en cualquier IP en el puerto 5238
+                });
                 webBuilder.UseStartup<Startup>();
             });
 }
@@ -20,7 +27,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddGrpc();
-        services.AddSingleton<MessageBrokerService>(); // Configurar como singleton
+        services.AddSingleton<MessageBrokerService>(); // Configurar como singleton si es necesario
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -43,4 +50,3 @@ public class Startup
         });
     }
 }
-

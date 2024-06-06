@@ -4,10 +4,12 @@ option csharp_namespace = "GrpcServiceMessage";
 
 service MessageBroker {
     rpc Publish(PublishRequest) returns (PublishReply);
-    rpc Subscribe(Message) returns (ClientRequest); // Cambié Message a ClientRequest
     rpc GetTopics (Empty) returns (TopicList);
     rpc Subscribe_publisher (ClientRequest) returns (Message);
     rpc SubscribeToTopic(ClientRequest) returns (stream Message);
+    rpc Subcribirse_Cliente (ClientRequest) returns (Message);
+
+    rpc Subscribe_prueba(ClientRequest) returns (stream ClientRequest);
 
 }
 
@@ -44,4 +46,9 @@ message ClientRequest {
     string suscritor = 4;
     string suscritorPublish = 5;
     string Topic = 6;
+}
+
+message Respuesta{
+    string tema = 1;
+    string mensaje = 2;
 }
