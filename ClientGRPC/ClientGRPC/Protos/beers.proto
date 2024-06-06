@@ -7,7 +7,15 @@ service MessageBroker {
     rpc Subscribe(ClientRequest) returns (ClientRequest); // Cambié Message a ClientRequest
     rpc GetTopics (Empty) returns (TopicList);
     rpc Subscribe_publisher (ClientRequest) returns (Message);
+    rpc SubscribeToTopic(ClientRequest) returns (stream Message);
+
 }
+
+
+message tema {
+    string topic = 1;
+}
+
 
 message PublishRequest {
     string topic = 1;

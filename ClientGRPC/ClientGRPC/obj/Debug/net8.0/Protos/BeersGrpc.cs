@@ -90,6 +90,14 @@ namespace ClientGRPC {
         __Marshaller_ClientRequest,
         __Marshaller_Message);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message> __Method_SubscribeToTopic = new grpc::Method<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SubscribeToTopic",
+        __Marshaller_ClientRequest,
+        __Marshaller_Message);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -126,6 +134,12 @@ namespace ClientGRPC {
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::ClientGRPC.Message> Subscribe_publisher(global::ClientGRPC.ClientRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task SubscribeToTopic(global::ClientGRPC.ClientRequest request, grpc::IServerStreamWriter<global::ClientGRPC.Message> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -267,6 +281,16 @@ namespace ClientGRPC {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Subscribe_publisher, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::ClientGRPC.Message> SubscribeToTopic(global::ClientGRPC.ClientRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SubscribeToTopic(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::ClientGRPC.Message> SubscribeToTopic(global::ClientGRPC.ClientRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_SubscribeToTopic, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override MessageBrokerClient NewInstance(ClientBaseConfiguration configuration)
@@ -284,7 +308,8 @@ namespace ClientGRPC {
           .AddMethod(__Method_Publish, serviceImpl.Publish)
           .AddMethod(__Method_Subscribe, serviceImpl.Subscribe)
           .AddMethod(__Method_GetTopics, serviceImpl.GetTopics)
-          .AddMethod(__Method_Subscribe_publisher, serviceImpl.Subscribe_publisher).Build();
+          .AddMethod(__Method_Subscribe_publisher, serviceImpl.Subscribe_publisher)
+          .AddMethod(__Method_SubscribeToTopic, serviceImpl.SubscribeToTopic).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -298,6 +323,7 @@ namespace ClientGRPC {
       serviceBinder.AddMethod(__Method_Subscribe, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.ClientRequest>(serviceImpl.Subscribe));
       serviceBinder.AddMethod(__Method_GetTopics, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.Empty, global::ClientGRPC.TopicList>(serviceImpl.GetTopics));
       serviceBinder.AddMethod(__Method_Subscribe_publisher, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message>(serviceImpl.Subscribe_publisher));
+      serviceBinder.AddMethod(__Method_SubscribeToTopic, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message>(serviceImpl.SubscribeToTopic));
     }
 
   }

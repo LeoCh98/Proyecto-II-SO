@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-
-
 List<string> temas = new List<string>(); // Lista para almacenar los temas
 List<string> suscripciones = new List<string>(); // Lista para almacenar las suscripciones del usuario
 List<string> suscripciones_Plublisher = new List<string>(); // Lista para almacenar las suscripciones del usuario
@@ -23,14 +21,14 @@ while (true)
 {
     if (cliente_1 == null)
     {
-        cliente_1 = new Cliente("801100976", "miriam", 20);
+        cliente_1 = new Cliente("801100990", "miriam", 20);
     }
 
     Console.WriteLine("Seleccione una opción:");
     Console.WriteLine("1. Publicar mensaje");
     Console.WriteLine("2. Suscribirse a un tema");
-    Console.WriteLine("3. Salir");
-
+    Console.WriteLine("3. Recibir mensajes de un tema");
+    Console.WriteLine("4. Salir");
 
     var option = Console.ReadLine();
 
@@ -43,6 +41,10 @@ while (true)
         await SuscripcionesMenu(client, cts.Token);
     }
     else if (option == "3")
+    {
+        await ReceiveMessages(client);
+    }
+    else if (option == "4")
     {
         break;
     }
@@ -59,9 +61,6 @@ async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
         Console.WriteLine("3. Subcribirse como productor");
         Console.WriteLine("4. Volver al menú principal");
 
-    
-
-
         var option = Console.ReadLine();
 
         if (option == "1")
@@ -76,15 +75,12 @@ async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
         {
             await Subcribe_Publisher_Topic(client);
         }
-
         else if (option == "4")
         {
             break;
         }
     }
 }
-
-
 
 async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
 {
@@ -117,28 +113,19 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
         }
         else
         {
-
             Console.WriteLine("ERROR DIGITE OTRO NUMERO");
         }
     }
 }
 
+//----------------------------------------------LISTAR-------------------------------------------------
 
-
-
-
-
-
-
-
-//------------------------------------------------------------------------------------------------
 async Task ListarTemas(MessageBroker.MessageBrokerClient client)
 {
     Console.Clear();
     Console.WriteLine("Temas existentes:");
 
     var response = await client.GetTopicsAsync(new Empty());
-
 
     temas = new List<string>(response.Topics);
 
@@ -149,6 +136,19 @@ async Task ListarTemas(MessageBroker.MessageBrokerClient client)
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();
 }
+void ListarMisSuscripciones()
+{
+    Console.Clear();
+    Console.WriteLine("Mis suscripciones:");
+    foreach (var suscripcion in suscripciones)
+    {
+        Console.WriteLine(suscripcion);
+    }
+    Console.WriteLine("Presione una tecla para continuar...");
+    Console.ReadKey();
+}
+//---------------------------------------------SUBCRIBIRSE-----------------------------------------------------
+
 
 async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 {
@@ -177,23 +177,19 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
         SuscritorPublish = "NONE",
         Topic = topic
     });
-    
 
-    if(response.Nombre== "REGISTRADO")
+    if (response.Nombre == "REGISTRADO")
     {
         suscripciones.Add(topic);
         Console.WriteLine("Suscrito al tema: " + topic);
         Console.WriteLine("Presione una tecla para continuar...");
         Console.ReadKey();
-
     }
     else if (response.Nombre == "YA SUSCRITO")
     {
         Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
         Console.ReadKey();
     }
-
-
 
     if (!suscripciones.Contains(topic))
     {
@@ -207,11 +203,7 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
         Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
         Console.ReadKey();
     }
-
-
 }
-
-
 
 async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 {
@@ -239,24 +231,21 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
         Topic = topic
     });
 
-
     if (response.Message_ == "PUBLISHER REGISTRADO")
     {
         suscripciones.Add(topic);
         Console.WriteLine("Suscrito al tema: " + topic);
         Console.WriteLine("Presione una tecla para continuar...");
         Console.ReadKey();
-
     }
     else if (response.Message_ == "YA SUSCRITO COMO PUBLISHER")
     {
         Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
         Console.ReadKey();
     }
-
 }
 
-
+//-------------------------------------------MENSAJE------------------------------------------
 
 
 async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
@@ -276,14 +265,39 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 
 
 
-void ListarMisSuscripciones()
+async Task ReceiveMessages(MessageBroker.MessageBrokerClient client)
 {
     Console.Clear();
-    Console.WriteLine("Mis suscripciones:");
-    foreach (var suscripcion in suscripciones)
+    Console.WriteLine("Seleccione el tema del cual desea recibir mensajes:");
+
+    ListarMisSuscripciones();
+
+
+
+    // Crea una solicitud para suscribirse a un tema
+    var request = new ClientRequest { Topic = "mi_tema" };
+
+    // Establece un token de cancelación para detener la suscripción (opcional)
+    var cts = new CancellationTokenSource();
+
+    // Establece un flujo de streaming para recibir mensajes del servidor
+    using var call = client.SubscribeToTopic(request);
+
+    // Lee los mensajes del flujo de streaming continuamente
+    await foreach (var message in call.ResponseStream.ReadAllAsync())
     {
-        Console.WriteLine(suscripcion);
+        Console.WriteLine("Mensaje recibido: " + message.Content);
     }
-    Console.WriteLine("Presione una tecla para continuar...");
+
+    // Espera hasta que el usuario presione una tecla para salir
+    Console.WriteLine("Presione una tecla para salir...");
     Console.ReadKey();
 }
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------
+

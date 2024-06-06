@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GrpcServiceMessage.Class;
 using ClientGRPC;
+using System.Net.NetworkInformation;
 
 namespace GrpcServiceMessage.Services
 {
@@ -19,8 +20,8 @@ namespace GrpcServiceMessage.Services
         private readonly ConcurrentDictionary<string, List<string>> _topics = new();
         private readonly ConcurrentDictionary<string, Cliente> listaClientes = new();
         private readonly List<Topic> lista_topic = new List<Topic>();
-        private readonly ConcurrentDictionary<string, ConcurrentBag<IServerStreamWriter<Message>>> _subscribers = new();
         private readonly object _logLock = new();
+       
 
         public MessageBrokerService(ILogger<MessageBrokerService> logger)
         {
@@ -56,70 +57,7 @@ namespace GrpcServiceMessage.Services
 
             return Task.FromResult(reply);
         }
-
-        public override Task<Message> Subscribe(ClientRequest request, ServerCallContext context)
-        {
-            // Buscar el tema solicitado en la lista de temas
-            var tema = lista_topic.FirstOrDefault(t => t.Nombre == request.Topic);
-
-            if (tema != null)
-            {
-                // Buscar el cliente en la lista de clientes suscritos
-                if (listaClientes.TryGetValue(request.Id, out var cliente))
-                {
-                    // Verificar si el cliente ya está suscrito al tema
-                    if (cliente.TopicsSubscritos.Contains(tema.Nombre))
-                    {
-                        return Task.FromResult(new Message
-                        {
-                            Topic = tema.Nombre,
-                            Message_ = "YA SUSCRITO",
-                            Content = tema.Descripcion
-                        });
-                    }
-                    else
-                    {
-                        // Agregar el tema a la lista de temas suscritos del cliente
-                        cliente.IngresarTopicsSubscritos(tema.Nombre);
-
-                        Console.WriteLine($"Cliente actualizado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
-
-                        return Task.FromResult(new Message
-                        {
-                            Topic = tema.Nombre,
-                            Message_ = "REGISTRADO",
-                            Content = tema.Descripcion
-                        });
-                    }
-                }
-                else
-                {
-                    // Crear un nuevo cliente y registrar el tema al que se suscribe
-                    cliente = new Cliente(request.Id, request.Nombre, request.Edad);
-                    cliente.IngresarTopicsSubscritos(tema.Nombre);
-                    listaClientes.TryAdd(request.Id, cliente);
-
-                    Console.WriteLine($"Nuevo cliente agregado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
-
-                    return Task.FromResult(new Message
-                    {
-                        Topic = tema.Nombre,
-                        Message_ = "REGISTRADO",
-                        Content = tema.Descripcion
-                    });
-                }
-            }
-            else
-            {
-                // Retornar un mensaje vacío indicando que el tema no fue encontrado
-                return Task.FromResult(new Message
-                {
-                    Topic = string.Empty,
-                    Message_ = "TEMA NO ENCONTRADO",
-                    Content = string.Empty
-                });
-            }
-        }
+       
 
 
         public override Task<Message> Subscribe_publisher(ClientRequest request, ServerCallContext context)
@@ -163,6 +101,8 @@ namespace GrpcServiceMessage.Services
                     // Crear un nuevo cliente y registrar el tema al que se suscribe
                     cliente = new Cliente(request.Id, request.Nombre, request.Edad);
                     cliente.IngresarTopicsPublish(tema.Nombre);
+
+
                     listaClientes.TryAdd(request.Id, cliente);
 
                     Console.WriteLine($"Nuevo cliente agregado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsPublish)}");
@@ -190,46 +130,87 @@ namespace GrpcServiceMessage.Services
 
         }
 
+        //-----------------------------------------------------------------------------
 
         public override Task<PublishReply> Publish(PublishRequest request, ServerCallContext context)
         {
-            var messages = _topics.GetOrAdd(request.Topic, new List<string>());
+            
+            bool iguales = false;
 
-            lock (messages)
+            bool Encontrado = false;
+            var tema = lista_topic.FirstOrDefault(t => t.Nombre == request.Topic);
+
+
+
+            if (listaClientes.TryGetValue(request.IdPublish, out var cliente))
             {
-                messages.Add(request.Message);
-            }
-
-            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
-
-            //topics.Add(request.Topic);
-
-            NotifySubscribers(request.Topic, request.Message);
-
-            return Task.FromResult(new PublishReply { Status = "publicacion guardada" });
-        }
-
-        private void NotifySubscribers(string topic, string message)
-        {
-            if (_subscribers.TryGetValue(topic, out var subscribers))
-            {
-                foreach (var subscriber in subscribers)
+                Encontrado = true;
+                if (cliente.TopicsPublish.Contains(request.Topic))
                 {
-                    _ = Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await subscriber.WriteAsync(new Message { Topic = topic, Message_ = message });
-                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al suscriptor del tema {topic}");
-                        }
-                        catch (Exception ex)
-                        {
-                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al suscriptor del tema {topic}: {ex.Message}");
-                        }
-                    });
+                    iguales = true;
                 }
             }
+
+
+
+            if (tema != null && Encontrado && iguales)
+            {
+                var messages = _topics.GetOrAdd(request.Topic, new List<string>());
+                lock (messages)
+                {
+                    messages.Add(request.Message);
+                }
+                LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
+                //topics.Add(request.Topic);
+                NotifySubscribers(request.Topic, request.Message);
+                return Task.FromResult(new PublishReply { Status = "publicacion guardada" });
+
+            }
+            else
+            {
+                return Task.FromResult(new PublishReply
+                {
+                    Status = "Tama no no encontrado"
+                });
+            }
+
         }
+
+
+
+
+        private void NotifySubscribers(string topic, string message)
+
+        {
+            var cts = new CancellationTokenSource();
+          
+
+            foreach (var subscriber in listaClientes)
+            {
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        var RT = new Message { Content = "Mensaje de ejemplo" };
+                   
+                        LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al suscriptor del tema {topic}");
+                    }
+                    catch (Exception ex)
+                    {
+                        LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al suscriptor del tema {topic}: {ex.Message}");
+                    }
+                });
+            }
+
+        }
+
+
+
+
+
+
+        //------------------------------------------------------------------------------
+
 
         private void LogEvent(string logMessage)
         {
@@ -241,10 +222,22 @@ namespace GrpcServiceMessage.Services
 
 
 
+        public override async Task SubscribeToTopic(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
+        {
+            // Aquí puedes implementar la lógica para enviar mensajes continuamente al cliente
+            while (!context.CancellationToken.IsCancellationRequested)
+            {
+                // Supongamos que generamos un mensaje de ejemplo
+                var message = new Message { Content = request.Topic };
 
+                // Enviamos el mensaje al cliente
+                await responseStream.WriteAsync(message);
+
+                // Simulamos un intervalo de tiempo entre mensajes
+                await Task.Delay(1000); // Espera 1 segundo antes de enviar el próximo mensaje
+            }
+        }
 
 
     }
 }
-
-
