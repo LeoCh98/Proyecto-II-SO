@@ -120,7 +120,7 @@ namespace GrpcServiceMessage.Services
                     {
                         if (message==tema.Nombre)
                         {
-                            item.Value.IngresarTema(tema.Nombre);
+                            item.Value.IngresarTema(request.Message);
                         }
                     }
                 }
@@ -135,11 +135,9 @@ namespace GrpcServiceMessage.Services
 
 
                 LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
-                //topics.Add(request.Topic);
-                //  NotifySubscribers(request.Topic, request.Message);
-
                
-                 _clientes.FirstOrDefault(t => t.Value.Id == request.IdPublish).Value.IngresarTema(request.Message);
+               
+               
 
              
 
@@ -233,6 +231,51 @@ namespace GrpcServiceMessage.Services
 
 
         }
+
+
+
+
+        public override Task<TopicList> listar_mensajes(ClientRequest request, ServerCallContext context)
+        {
+            var reply = new TopicList();
+            var p = new List<string>();
+
+            if (_clientStreams.TryGetValue(request.Id, out var clientStreamWriter))
+            {
+                
+
+                var clien = _clientes.FirstOrDefault(t => t.Value.Id == request.Id);
+                var cola = clien.Value.ObtenerColaDeTemas();
+
+                if (cola != null)
+                {
+                    foreach (var pi in cola)
+                    {
+                      p.Add(pi.ToString());
+                    }
+                }
+                else
+                {
+                    p.Add("No hay mensajes");
+                   
+                }
+
+                
+
+                reply.Topics.AddRange(p);
+                LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Lista de temas enviada al cliente");
+                return Task.FromResult(reply);
+            }
+            else
+            {
+
+                p.Add("No hay mensajes");
+                reply.Topics.AddRange(p);
+                return Task.FromResult(reply);
+            }
+
+        }
+
 
 
 
@@ -463,6 +506,17 @@ namespace GrpcServiceMessage.Services
 
 
         //------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
         private void LogEvent(string logMessage)

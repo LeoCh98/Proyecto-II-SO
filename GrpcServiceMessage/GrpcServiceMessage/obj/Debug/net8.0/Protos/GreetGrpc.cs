@@ -112,6 +112,14 @@ namespace GrpcServiceMessage {
         __Marshaller_ClientRequest,
         __Marshaller_ClientRequest);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GrpcServiceMessage.ClientRequest, global::GrpcServiceMessage.TopicList> __Method_listar_mensajes = new grpc::Method<global::GrpcServiceMessage.ClientRequest, global::GrpcServiceMessage.TopicList>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "listar_mensajes",
+        __Marshaller_ClientRequest,
+        __Marshaller_TopicList);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -164,6 +172,12 @@ namespace GrpcServiceMessage {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GrpcServiceMessage.TopicList> listar_mensajes(global::GrpcServiceMessage.ClientRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -178,7 +192,8 @@ namespace GrpcServiceMessage {
           .AddMethod(__Method_SubscribeToTopic, serviceImpl.SubscribeToTopic)
           .AddMethod(__Method_Enviar, serviceImpl.Enviar)
           .AddMethod(__Method_Subcribirse_Cliente, serviceImpl.Subcribirse_Cliente)
-          .AddMethod(__Method_Subscribe_prueba, serviceImpl.Subscribe_prueba).Build();
+          .AddMethod(__Method_Subscribe_prueba, serviceImpl.Subscribe_prueba)
+          .AddMethod(__Method_listar_mensajes, serviceImpl.listar_mensajes).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -195,6 +210,7 @@ namespace GrpcServiceMessage {
       serviceBinder.AddMethod(__Method_Enviar, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GrpcServiceMessage.ClientRequest, global::GrpcServiceMessage.Message>(serviceImpl.Enviar));
       serviceBinder.AddMethod(__Method_Subcribirse_Cliente, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GrpcServiceMessage.ClientRequest, global::GrpcServiceMessage.Message>(serviceImpl.Subcribirse_Cliente));
       serviceBinder.AddMethod(__Method_Subscribe_prueba, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::GrpcServiceMessage.ClientRequest, global::GrpcServiceMessage.ClientRequest>(serviceImpl.Subscribe_prueba));
+      serviceBinder.AddMethod(__Method_listar_mensajes, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcServiceMessage.ClientRequest, global::GrpcServiceMessage.TopicList>(serviceImpl.listar_mensajes));
     }
 
   }

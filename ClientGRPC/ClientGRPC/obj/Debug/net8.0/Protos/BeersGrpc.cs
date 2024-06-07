@@ -104,6 +104,14 @@ namespace ClientGRPC {
         __Marshaller_ClientRequest,
         __Marshaller_Message);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::ClientGRPC.ClientRequest, global::ClientGRPC.TopicList> __Method_listar_mensajes = new grpc::Method<global::ClientGRPC.ClientRequest, global::ClientGRPC.TopicList>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "listar_mensajes",
+        __Marshaller_ClientRequest,
+        __Marshaller_TopicList);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -146,6 +154,12 @@ namespace ClientGRPC {
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task Enviar(global::ClientGRPC.ClientRequest request, grpc::IServerStreamWriter<global::ClientGRPC.Message> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::ClientGRPC.TopicList> listar_mensajes(global::ClientGRPC.ClientRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -279,6 +293,26 @@ namespace ClientGRPC {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_Enviar, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::ClientGRPC.TopicList listar_mensajes(global::ClientGRPC.ClientRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return listar_mensajes(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::ClientGRPC.TopicList listar_mensajes(global::ClientGRPC.ClientRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_listar_mensajes, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::ClientGRPC.TopicList> listar_mensajesAsync(global::ClientGRPC.ClientRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return listar_mensajesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::ClientGRPC.TopicList> listar_mensajesAsync(global::ClientGRPC.ClientRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_listar_mensajes, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override MessageBrokerClient NewInstance(ClientBaseConfiguration configuration)
@@ -298,7 +332,8 @@ namespace ClientGRPC {
           .AddMethod(__Method_Subscribe_publisher, serviceImpl.Subscribe_publisher)
           .AddMethod(__Method_SubscribeToTopic, serviceImpl.SubscribeToTopic)
           .AddMethod(__Method_Subcribirse_Cliente, serviceImpl.Subcribirse_Cliente)
-          .AddMethod(__Method_Enviar, serviceImpl.Enviar).Build();
+          .AddMethod(__Method_Enviar, serviceImpl.Enviar)
+          .AddMethod(__Method_listar_mensajes, serviceImpl.listar_mensajes).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -314,6 +349,7 @@ namespace ClientGRPC {
       serviceBinder.AddMethod(__Method_SubscribeToTopic, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message>(serviceImpl.SubscribeToTopic));
       serviceBinder.AddMethod(__Method_Subcribirse_Cliente, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message>(serviceImpl.Subcribirse_Cliente));
       serviceBinder.AddMethod(__Method_Enviar, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.Message>(serviceImpl.Enviar));
+      serviceBinder.AddMethod(__Method_listar_mensajes, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ClientGRPC.ClientRequest, global::ClientGRPC.TopicList>(serviceImpl.listar_mensajes));
     }
 
   }

@@ -18,6 +18,8 @@ service MessageBroker {
 
     rpc Subscribe_prueba(ClientRequest) returns (stream ClientRequest);
 
+    rpc listar_mensajes(ClientRequest) returns(TopicList);
+
 }
 
 message PublishRequest {

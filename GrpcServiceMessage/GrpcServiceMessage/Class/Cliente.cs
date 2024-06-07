@@ -1,6 +1,7 @@
 ﻿using Grpc.Core;
 using GrpcServiceMessage;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,11 @@ namespace ClientGRPC
         public List<string> TopicsPublish { get; set; } // Lista de temas a los que está suscrito el cliente
 
         public AsyncServerStreamingCall<Message> Stream { get; set; }
+        public List<string> ColaDeTemas { get; set; }
+
+       // private readonly ConcurrentDictionary<string, ConcurrentDictionary<string, List<Mensaje>>> _clientes = new ConcurrentDictionary<string, ConcurrentDictionary<string, List<Mensaje>>>();
 
 
-        public List<string> ColaDeTemas { get; set; } 
 
 
         public Cliente()
