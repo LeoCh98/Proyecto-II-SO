@@ -77,7 +77,7 @@ namespace GrpcServiceMessage.Services
              _clientes.TryAdd(request.Id, cliente);
              _clientStreams.TryAdd(request.Id, responseStream);
 
-            await responseStream.WriteAsync(new Message { Content = "TEMA GUARDADO GUARDADO" });
+            await responseStream.WriteAsync(new Message { Content = "Tema " + request.Topic + " inscrito correctamente." });
            // await EnviarMensajeACliente(request.Id, new Message { Content = "Cliente suscrito correctamente" });
 
         }
@@ -147,7 +147,7 @@ namespace GrpcServiceMessage.Services
             }
             else
             {
-                await responseStream.WriteAsync(new Message { Content = "ERROR NO SE ENCUENTRA SUBCRITO COMO PUBLISHER" });
+                await responseStream.WriteAsync(new Message { Content = "AÃºn no se ha subscrito como publisher." });
             }
 
         }
@@ -168,7 +168,7 @@ namespace GrpcServiceMessage.Services
                 // Buscar el cliente en la lista de clientes suscritos
                 if (_clientes.TryGetValue(request.Id, out var cliente))
                 {
-                    // Verificar si el cliente ya está suscrito al tema
+                    // Verificar si el cliente ya estï¿½ suscrito al tema
                     if (cliente.TopicsPublish.Contains(tema.Nombre))
                     {
                         return Task.FromResult(new Message
@@ -214,7 +214,7 @@ namespace GrpcServiceMessage.Services
             }
             else
             {
-                // Retornar un mensaje vacío indicando que el tema no fue encontrado
+                // Retornar un mensaje vacï¿½o indicando que el tema no fue encontrado
                 return Task.FromResult(new Message
                 {
                     Topic = string.Empty,
@@ -277,7 +277,7 @@ namespace GrpcServiceMessage.Services
 
         public override async Task Enviar(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            // Verifica si el cliente está en el diccionario
+            // Verifica si el cliente estï¿½ en el diccionario
             if (_clientStreams.TryGetValue(request.Id, out var clientStreamWriter))
             {
                 var clien = _clientes.FirstOrDefault(t => t.Value.Id == request.Id);
@@ -294,7 +294,7 @@ namespace GrpcServiceMessage.Services
                 }
                 else
                 {
-                    // Envía el mensaje al cliente
+                    // Envï¿½a el mensaje al cliente
                     await clientStreamWriter.WriteAsync(new Message { Content = "no hay mensajes" });
                 }
 
@@ -302,8 +302,8 @@ namespace GrpcServiceMessage.Services
             }
             else
             {
-                // El cliente no está conectado o no existe
-                Console.WriteLine($"El cliente con ID {request.Id} no está conectado.");
+                // El cliente no estï¿½ conectado o no existe
+                Console.WriteLine($"El cliente con ID {request.Id} no estï¿½ conectado.");
                 if (clientStreamWriter != null)
                 {
                     await clientStreamWriter.WriteAsync(new Message { Content = "no hay mensajes" });
@@ -322,7 +322,7 @@ namespace GrpcServiceMessage.Services
 
         public override async Task SubscribeToTopic(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            // Aquí puedes implementar la lógica para enviar mensajes continuamente al cliente
+            // Aquï¿½ puedes implementar la lï¿½gica para enviar mensajes continuamente al cliente
 
             // Supongamos que generamos un mensaje de ejemplo
             var message = new Message { Content = request.Topic };
@@ -331,7 +331,7 @@ namespace GrpcServiceMessage.Services
             await responseStream.WriteAsync(message);
 
             // Simulamos un intervalo de tiempo entre mensajes
-            await Task.Delay(1000); // Espera 1 segundo antes de enviar el próximo mensaje
+            await Task.Delay(1000); // Espera 1 segundo antes de enviar el prï¿½ximo mensaje
 
         }
 
@@ -385,7 +385,7 @@ namespace GrpcServiceMessage.Services
                 // Buscar el cliente en la lista de clientes suscritos
                 if (listaClientes.TryGetValue(request.Id, out var cliente))
                 {
-                    // Verificar si el cliente ya está suscrito al tema
+                    // Verificar si el cliente ya estï¿½ suscrito al tema
                     if (cliente.TopicsSubscritos.Contains(tema.Nombre))
                     {
                         return Task.FromResult(new Message
@@ -434,7 +434,7 @@ namespace GrpcServiceMessage.Services
             }
             else
             {
-                // Retornar un mensaje vacío indicando que el tema no fue encontrado
+                // Retornar un mensaje vacï¿½o indicando que el tema no fue encontrado
                 return Task.FromResult(new Message
                 {
                     Topic = string.Empty,

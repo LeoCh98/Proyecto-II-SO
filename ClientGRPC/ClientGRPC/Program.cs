@@ -135,6 +135,7 @@ async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
         Console.ReadKey();
     }
 }
+
 async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
 {
     while (true)
@@ -151,33 +152,35 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
         Console.WriteLine("=======================================");
         Console.Write("Opción: ");
 
-        var option = Console.ReadLine();
-
-        if (option == "1")
+        if (int.TryParse(Console.ReadLine(), out int option))
         {
-            await SubscribeToTopic(client);
-        }
-        else if (option == "2")
-        {
-            ListarMisSuscripciones();
-        }
-        else if (option == "3")
-        {
-            await ListarTemas(client);
-        }
-        else if (option == "4")
-        {
-            Listar_Publisher();
-        }
-        else if (option == "5")
-        {
-            break;
+            switch (option)
+            {
+                case 1:
+                    await SubscribeToTopic(client);
+                    break;
+                case 2:
+                    ListarMisSuscripciones();
+                    break;
+                case 3:
+                    await ListarTemasDisp(client);
+                    break;
+                case 4:
+                    Listar_Publisher();
+                    break;
+                case 5:
+                    return;
+                default:
+                    Console.WriteLine("Opción no válida. Intente de nuevo.");
+                    break;
+            }
         }
         else
         {
-            Console.WriteLine("ERROR: Por favor, digite otro número");
-            Console.ReadKey();
+            Console.WriteLine("Opción no válida. Intente de nuevo.");
         }
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
     }
 }
 
@@ -199,9 +202,27 @@ async Task ListarTemas(MessageBroker.MessageBrokerClient client)
         Console.WriteLine(tema);
     }
     Console.WriteLine("=======================================");
-
-
 }
+
+async Task ListarTemasDisp(MessageBroker.MessageBrokerClient client)
+{
+    Console.Clear();
+    Console.WriteLine("=======================================");
+    Console.WriteLine("          TEMAS DISPONIBLES");
+    Console.WriteLine("=======================================");
+
+    var response = await client.GetTopicsAsync(new Empty());
+
+    temas = new List<string>(response.Topics);
+    var temasNoSuscritos = temas.Except(suscripciones);
+
+    foreach (var tema in temasNoSuscritos)
+    {
+        Console.WriteLine(tema);
+    }
+    Console.WriteLine("=======================================");
+}
+
 async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
 {
     Console.Clear();
@@ -224,9 +245,7 @@ async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
         Console.WriteLine(tema);
     }
     Console.WriteLine("=======================================");
-    Console.ReadKey();
 }
-
 
 void ListarMisSuscripciones()
 {
@@ -239,11 +258,7 @@ void ListarMisSuscripciones()
         Console.WriteLine(suscripcion);
     }
     Console.WriteLine("=======================================");
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
 }
-
-
 
 void Listar_Publisher()
 {
@@ -256,10 +271,7 @@ void Listar_Publisher()
         Console.WriteLine(suscripcion);
     }
     Console.WriteLine("=======================================");
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
 }
-
 
 //---------------------------------------------SUBCRIBIRSE-----------------------------------------------------
 
@@ -271,7 +283,7 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
     string topic = Console.ReadLine();
     if (string.IsNullOrEmpty(topic))
     {
-        Console.WriteLine("El tema no existe.");
+        Console.WriteLine("Por favor, debe ingresar un tema.");
         return;
     }
     Console.Clear();
@@ -288,12 +300,22 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 
     var response = await client.Subcribirse_ClienteAsync(request);
 
-    if(!string.IsNullOrEmpty(response.Content)){
-        suscripciones.Add(topic);
+    if (!string.IsNullOrEmpty(response.Content) && temas.Contains(topic))
+    {
+        if (!suscripciones.Contains(topic))
+        {
+            suscripciones.Add(topic);
+            Console.WriteLine(response.Content);
+        }
+        else 
+        {
+            Console.WriteLine("Ya se encuentra suscrito al tema " + topic);
+        }
     }
-
-    Console.WriteLine(response.Content);
-    Console.ReadKey();
+    else
+    {
+        Console.WriteLine("El tema "+ topic +" no existe.");
+    }
 }
 
 async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
@@ -305,7 +327,7 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 
     if (!temas.Contains(topic))
     {
-        Console.WriteLine("El tema no existe.");
+        Console.WriteLine("El tema "+ topic +" no existe.");
         return;
     }
     Console.Clear();
@@ -323,7 +345,7 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
     if (response.Message_ == "PUBLISHER REGISTRADO")
     {
         suscripciones_Publisher.Add(topic);
-        Console.WriteLine("Suscrito al tema: " + topic + "como publisher.");
+        Console.WriteLine("Suscrito al tema: " + topic + " como publisher.");
     }
     else if (response.Message_ == "YA SUSCRITO COMO PUBLISHER")
     {
@@ -346,7 +368,7 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
     if (!temas.Contains(topic) && !string.IsNullOrEmpty(topic))
     {
         Console.Clear();
-        Console.WriteLine("El tema no existe.");
+        Console.WriteLine("El tema "+ topic +" no existe.");
         return;
     }
 
