@@ -1,0 +1,2 @@
+obj/Debug/net8.0/Protos/Beers.cs \
+obj/Debug/net8.0/Protos/BeersGrpc.cs: Protos/beers.proto

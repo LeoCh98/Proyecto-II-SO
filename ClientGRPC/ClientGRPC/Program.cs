@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using static ClientGRPC.MessageBroker;
+using System.ComponentModel.DataAnnotations;
 
 List<string> temas = new List<string>(); // Lista para almacenar los temas
 List<string> suscripciones = new List<string>(); // Lista para almacenar las suscripciones del usuario
@@ -18,7 +19,8 @@ var cts = new CancellationTokenSource();
 
 Cliente cliente_1 = ObtenerDatosUsuario();
 
-while (true)
+bool salir = false;
+while (!salir)
 {
     Console.Clear();
     Console.WriteLine("=======================================");
@@ -32,44 +34,62 @@ while (true)
     Console.WriteLine("=======================================");
     Console.Write("Opción: ");
 
-    var option = Console.ReadLine();
-
-    if (option == "1")
+    if (int.TryParse(Console.ReadLine(), out int option))
     {
-        await Menublisher(client, cliente_1.Id);
+        switch (option)
+        {
+            case 1:
+                await Menublisher(client, cliente_1.Id);
+                break;
+            case 2:
+                await SuscripcionesMenu(client, cts.Token);
+                break;
+            case 3:
+                var request = new ClientRequest { Topic = "CONECTADO" };
+                await Listar_mensajes_Recibidos(client);
+                break;
+            case 4:
+                salir = true;
+                continue;
+            default:
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+                break;
+        }
     }
-    else if (option == "2")
+    else
     {
-        await SuscripcionesMenu(client, cts.Token);
+        Console.WriteLine("Opción no válida. Intente de nuevo.");
     }
-    else if (option == "3")
-    {
-        var request = new ClientRequest { Topic = "CONECTADO" };
-        await Listar_mensajes_Recibidos(client);
-    }
-    else if (option == "4")
-    {
-        break;
-    }
+    Console.WriteLine("Presione una tecla para continuar...");
+    Console.ReadKey();
 }
 
 Cliente ObtenerDatosUsuario()
 {
-    Console.Clear();
-    Console.WriteLine("=======================================");
-    Console.WriteLine("       INGRESO DE DATOS DEL USUARIO");
-    Console.WriteLine("=======================================");
+    while (true)
+    {
+        Console.Clear();
+        Console.WriteLine("=======================================");
+        Console.WriteLine("       INGRESO DE DATOS DEL USUARIO");
+        Console.WriteLine("=======================================");
 
-    Console.Write("Ingrese el ID del cliente: ");
-    var id = Console.ReadLine();
+        Console.Write("Ingrese el ID del cliente: ");
+        var id = Console.ReadLine();
 
-    Console.Write("Ingrese el nombre del cliente: ");
-    var nombre = Console.ReadLine();
+        Console.Write("Ingrese el nombre del cliente: ");
+        var nombre = Console.ReadLine();
 
-    Console.Write("Ingrese la edad del cliente: ");
-    var edad = int.Parse(Console.ReadLine());
-
-    return new Cliente(id, nombre, edad);
+        Console.Write("Ingrese la edad del cliente: ");
+        if (int.TryParse(Console.ReadLine(), out int edad) && !string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(nombre))
+        {
+            return new Cliente(id, nombre, edad);
+        }
+        else
+        {
+            Console.WriteLine("\nFormato inválido. Intente de nuevo.");
+            Console.ReadKey();
+        }
+    }
 }
 
 async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
@@ -87,24 +107,32 @@ async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
         Console.WriteLine("=======================================");
         Console.Write("Opción: ");
 
-        var option = Console.ReadLine();
-
-        if (option == "1")
+        if (int.TryParse(Console.ReadLine(), out int option))
         {
-            await PublishMessage(client, id);
+            switch (option)
+            {
+                case 1:
+                    await PublishMessage(client, id);
+                    break;
+                case 2:
+                    await ListarTemas(client);
+                    break;
+                case 3:
+                    await Subcribe_Publisher_Topic(client);
+                    break;
+                case 4:
+                    continue;
+                default:
+                    Console.WriteLine("Opción no válida. Intente de nuevo.");
+                    break;
+            }
         }
-        else if (option == "2")
+        else
         {
-            await ListarTemas(client);
+            Console.WriteLine("Opción no válida. Intente de nuevo.");
         }
-        else if (option == "3")
-        {
-            await Subcribe_Publisher_Topic(client);
-        }
-        else if (option == "4")
-        {
-            break;
-        }
+        Console.WriteLine("Presione una tecla para continuar...");
+        Console.ReadKey();
     }
 }
 
@@ -167,8 +195,6 @@ async Task ListarTemas(MessageBroker.MessageBrokerClient client)
         Console.WriteLine(tema);
     }
     Console.WriteLine("=======================================");
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
 }
 
 async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
@@ -193,8 +219,6 @@ async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
         Console.WriteLine(tema);
     }
     Console.WriteLine("=======================================");
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
 }
 
 void ListarMisSuscripciones()
@@ -235,7 +259,6 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
     var response = await client.Subcribirse_ClienteAsync(request);
 
     Console.WriteLine(response.Content);
-    Console.ReadKey();
 }
 
 async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
@@ -249,8 +272,6 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
     if (!temas.Contains(topic))
     {
         Console.WriteLine("El tema no existe.");
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
         return;
     }
 
@@ -268,13 +289,10 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
     {
         suscripciones.Add(topic);
         Console.WriteLine("Suscrito al tema: " + topic);
-        Console.WriteLine("Presione una tecla para continuar...");
-        Console.ReadKey();
     }
     else if (response.Message_ == "YA SUSCRITO COMO PUBLISHER")
     {
         Console.WriteLine("Ya se encuentra Suscrito al tema: " + topic);
-        Console.ReadKey();
     }
 }
 
@@ -282,12 +300,21 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 
 async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 {
+    await ListarTemas(client);
     Console.Clear();
     Console.WriteLine("=======================================");
     Console.WriteLine("       PUBLICAR MENSAJE");
     Console.WriteLine("=======================================");
     Console.Write("Ingrese el tema: ");
     var topic = Console.ReadLine();
+
+    if (!temas.Contains(topic))
+    {
+        Console.Clear();
+        Console.WriteLine("El tema no existe.");
+        return;
+    }
+
     Console.Write("Ingrese el mensaje: ");
     var message = Console.ReadLine();
 
@@ -295,8 +322,6 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 
     Console.WriteLine("Respuesta del servidor: " + reply.Content);
     Console.WriteLine("=======================================");
-    Console.WriteLine("Presione una tecla para continuar...");
-    Console.ReadKey();
 }
 
 async Task RecibirMensajes(string client_ID, MessageBroker.MessageBrokerClient client)

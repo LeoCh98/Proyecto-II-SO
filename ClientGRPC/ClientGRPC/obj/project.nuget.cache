@@ -1,15 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "qoytvCVrObg3catuqzJLB8E9U5ki4sTApo1R8m4MiZkSTSKomShwSh3DASmhSngM6hP2cXdM3UHXA4aaff3qsg==",
+  "dgSpecHash": "ZoRwPpGtb00=",
   "success": true,
-  "projectFilePath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\ClientGRPC\\ClientGRPC\\ClientGRPC.csproj",
+  "projectFilePath": "/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/ClientGRPC/ClientGRPC/ClientGRPC.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\alexb\\.nuget\\packages\\google.protobuf\\3.27.0\\google.protobuf.3.27.0.nupkg.sha512",
-    "C:\\Users\\alexb\\.nuget\\packages\\grpc.core.api\\2.63.0\\grpc.core.api.2.63.0.nupkg.sha512",
-    "C:\\Users\\alexb\\.nuget\\packages\\grpc.net.client\\2.63.0\\grpc.net.client.2.63.0.nupkg.sha512",
-    "C:\\Users\\alexb\\.nuget\\packages\\grpc.net.common\\2.63.0\\grpc.net.common.2.63.0.nupkg.sha512",
-    "C:\\Users\\alexb\\.nuget\\packages\\grpc.tools\\2.64.0\\grpc.tools.2.64.0.nupkg.sha512",
-    "C:\\Users\\alexb\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+    "/home/leo/.nuget/packages/google.protobuf/3.27.0/google.protobuf.3.27.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/grpc.core.api/2.63.0/grpc.core.api.2.63.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/grpc.net.client/2.63.0/grpc.net.client.2.63.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/grpc.net.common/2.63.0/grpc.net.common.2.63.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/grpc.tools/2.64.0/grpc.tools.2.64.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
