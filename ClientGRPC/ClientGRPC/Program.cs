@@ -121,7 +121,7 @@ async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
                     await Subcribe_Publisher_Topic(client);
                     break;
                 case 4:
-                    continue;
+                    return;
                 default:
                     Console.WriteLine("Opción no válida. Intente de nuevo.");
                     break;
@@ -244,6 +244,11 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 
     Console.WriteLine("Ingrese el tema:");
     var topic = Console.ReadLine();
+    if(string.IsNullOrEmpty(topic))
+    {
+        Console.WriteLine("El tema no existe.");
+        return;
+    }
     Console.Clear();
 
     var request = new ClientRequest
@@ -267,13 +272,13 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 
     Console.WriteLine("Ingrese el tema:");
     var topic = Console.ReadLine();
-    Console.Clear();
 
     if (!temas.Contains(topic))
     {
         Console.WriteLine("El tema no existe.");
         return;
     }
+    Console.Clear();
 
     var response = await client.Subscribe_publisherAsync(new ClientRequest
     {
@@ -308,7 +313,7 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
     Console.Write("Ingrese el tema: ");
     var topic = Console.ReadLine();
 
-    if (!temas.Contains(topic))
+    if (!temas.Contains(topic) && !string.IsNullOrEmpty(topic))
     {
         Console.Clear();
         Console.WriteLine("El tema no existe.");
@@ -317,10 +322,15 @@ async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 
     Console.Write("Ingrese el mensaje: ");
     var message = Console.ReadLine();
-
-    var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
-
-    Console.WriteLine("Respuesta del servidor: " + reply.Content);
+    if (!string.IsNullOrEmpty(message))
+    {
+        var reply = await client.PublishAsync(new PublishRequest { Topic = topic, Message = message, IdPublish = id });
+        Console.WriteLine("Respuesta del servidor: " + reply.Content);
+    }
+    else
+    {
+        Console.WriteLine("Mensaje sin contenido, intente nuevamente.");
+    }
     Console.WriteLine("=======================================");
 }
 
