@@ -135,7 +135,6 @@ async Task Menublisher(MessageBroker.MessageBrokerClient client, String id)
         Console.ReadKey();
     }
 }
-
 async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, CancellationToken cancellationToken)
 {
     while (true)
@@ -147,7 +146,8 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
         Console.WriteLine("1. Suscribirse a un tema");
         Console.WriteLine("2. Ver mis suscripciones");
         Console.WriteLine("3. Ver suscripciones disponibles");
-        Console.WriteLine("4. Volver al menú principal");
+        Console.WriteLine("4. Ver mis suscripciones Publisher");
+        Console.WriteLine("5. Volver al menú principal");
         Console.WriteLine("=======================================");
         Console.Write("Opción: ");
 
@@ -166,6 +166,10 @@ async Task SuscripcionesMenu(MessageBroker.MessageBrokerClient client, Cancellat
             await ListarTemas(client);
         }
         else if (option == "4")
+        {
+            Listar_Publisher();
+        }
+        else if (option == "5")
         {
             break;
         }
@@ -195,8 +199,9 @@ async Task ListarTemas(MessageBroker.MessageBrokerClient client)
         Console.WriteLine(tema);
     }
     Console.WriteLine("=======================================");
-}
 
+
+}
 async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
 {
     Console.Clear();
@@ -219,7 +224,9 @@ async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
         Console.WriteLine(tema);
     }
     Console.WriteLine("=======================================");
+    Console.ReadKey();
 }
+
 
 void ListarMisSuscripciones()
 {
@@ -235,6 +242,24 @@ void ListarMisSuscripciones()
     Console.WriteLine("Presione una tecla para continuar...");
     Console.ReadKey();
 }
+
+
+
+void Listar_Publisher()
+{
+    Console.Clear();
+    Console.WriteLine("=======================================");
+    Console.WriteLine("       MIS SUSCRIPCIONES DE PUBLISHER ");
+    Console.WriteLine("=======================================");
+    foreach (var suscripcion in suscripciones_Publisher)
+    {
+        Console.WriteLine(suscripcion);
+    }
+    Console.WriteLine("=======================================");
+    Console.WriteLine("Presione una tecla para continuar...");
+    Console.ReadKey();
+}
+
 
 //---------------------------------------------SUBCRIBIRSE-----------------------------------------------------
 
@@ -263,11 +288,12 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 
     var response = await client.Subcribirse_ClienteAsync(request);
 
-    if(string.IsNullOrEmpty(response.Content)){
+    if(!string.IsNullOrEmpty(response.Content)){
         suscripciones.Add(topic);
     }
 
     Console.WriteLine(response.Content);
+    Console.ReadKey();
 }
 
 async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)

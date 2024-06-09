@@ -77,7 +77,7 @@ namespace GrpcServiceMessage.Services
              _clientes.TryAdd(request.Id, cliente);
              _clientStreams.TryAdd(request.Id, responseStream);
 
-            await responseStream.WriteAsync(new Message { Content = "Cliente guardado" });
+            await responseStream.WriteAsync(new Message { Content = "TEMA GUARDADO GUARDADO" });
            // await EnviarMensajeACliente(request.Id, new Message { Content = "Cliente suscrito correctamente" });
 
         }
