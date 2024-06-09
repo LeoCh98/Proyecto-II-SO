@@ -243,7 +243,7 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
     await ListarTemas(client);
 
     Console.WriteLine("Ingrese el tema:");
-    var topic = Console.ReadLine();
+    string topic = Console.ReadLine();
     if (string.IsNullOrEmpty(topic))
     {
         Console.WriteLine("El tema no existe.");
@@ -262,6 +262,10 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
     };
 
     var response = await client.Subcribirse_ClienteAsync(request);
+
+    if(string.IsNullOrEmpty(response.Content)){
+        suscripciones.Add(topic);
+    }
 
     Console.WriteLine(response.Content);
 }
@@ -292,8 +296,8 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 
     if (response.Message_ == "PUBLISHER REGISTRADO")
     {
-        suscripciones.Add(topic);
-        Console.WriteLine("Suscrito al tema: " + topic);
+        suscripciones_Publisher.Add(topic);
+        Console.WriteLine("Suscrito al tema: " + topic + "como publisher.");
     }
     else if (response.Message_ == "YA SUSCRITO COMO PUBLISHER")
     {
