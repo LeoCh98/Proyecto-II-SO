@@ -244,7 +244,7 @@ async Task SubscribeToTopic(MessageBroker.MessageBrokerClient client)
 
     Console.WriteLine("Ingrese el tema:");
     var topic = Console.ReadLine();
-    if(string.IsNullOrEmpty(topic))
+    if (string.IsNullOrEmpty(topic))
     {
         Console.WriteLine("El tema no existe.");
         return;
@@ -356,5 +356,3 @@ async Task RecibirMensajes(string client_ID, MessageBroker.MessageBrokerClient c
         Console.WriteLine($"Error al recibir mensajes del servidor: {ex}");
     }
 }
-
-
