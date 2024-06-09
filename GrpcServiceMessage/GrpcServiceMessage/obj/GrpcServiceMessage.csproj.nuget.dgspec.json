@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/GrpcServiceMessage.csproj": {}
+    "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj": {}
   },
   "projects": {
-    "/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/GrpcServiceMessage.csproj": {
+    "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/GrpcServiceMessage.csproj",
+        "projectUniqueName": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj",
         "projectName": "GrpcServiceMessage",
-        "projectPath": "/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/GrpcServiceMessage.csproj",
-        "packagesPath": "/home/leo/.nuget/packages/",
-        "outputPath": "/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/",
+        "projectPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\GrpcServiceMessage.csproj",
+        "packagesPath": "C:\\Users\\alexb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alexb\\OneDrive\\almacenamiento antes de reseteo\\Documentos\\GRPC\\GrpcServiceMessage\\GrpcServiceMessage\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/leo/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\alexb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,11 +39,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -67,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

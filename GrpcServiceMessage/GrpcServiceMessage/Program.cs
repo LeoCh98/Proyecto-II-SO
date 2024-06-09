@@ -1,5 +1,9 @@
 using GrpcServiceMessage.Services;
 
+
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
 public class Program
 {
     public static void Main(string[] args)
@@ -11,9 +15,12 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.UseStartup<Startup>();
+                webBuilder.UseStartup<Startup>()
+                          .UseUrls("http://0.0.0.0:5238"); // Cambia el puerto según sea necesario
             });
 }
+
+
 
 public class Startup
 {

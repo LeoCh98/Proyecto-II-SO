@@ -247,6 +247,9 @@ async Task Listar_mensajes_Recibidos(MessageBroker.MessageBrokerClient client)
     Console.WriteLine("=======================================");
 }
 
+
+
+
 void ListarMisSuscripciones()
 {
     Console.Clear();
@@ -357,13 +360,34 @@ async Task Subcribe_Publisher_Topic(MessageBroker.MessageBrokerClient client)
 
 async Task PublishMessage(MessageBroker.MessageBrokerClient client, String id)
 {
-    await ListarTemas(client);
     Console.Clear();
+
     Console.WriteLine("=======================================");
     Console.WriteLine("       PUBLICAR MENSAJE");
     Console.WriteLine("=======================================");
-    Console.Write("Ingrese el tema: ");
-    var topic = Console.ReadLine();
+    if (suscripciones_Publisher.Count > 0)
+    {
+
+        Console.WriteLine("\nTEMAS SUBCRITOS                               \n");
+
+        foreach (var tema in suscripciones_Publisher)
+        {
+
+            Console.WriteLine(tema);
+        }
+    }
+    else
+    {
+        Console.WriteLine("NO SE ENCUENTRA TEMAS REGISTRADO COMO PRODUCTOR");
+        return;
+    }
+
+    Console.WriteLine("=======================================");
+
+
+
+    Console.Write("Ingrese el tema: "); var topic = Console.ReadLine();
+
 
     if (!temas.Contains(topic) && !string.IsNullOrEmpty(topic))
     {

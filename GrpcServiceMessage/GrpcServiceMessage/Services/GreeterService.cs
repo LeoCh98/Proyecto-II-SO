@@ -20,512 +20,286 @@ namespace GrpcServiceMessage.Services
         private readonly ILogger<MessageBrokerService> _logger;
         private readonly ConcurrentDictionary<string, List<string>> _topics = new();
         private readonly ConcurrentDictionary<string, Cliente> listaClientes = new();
-        private readonly List<Topic> lista_topic = new List<Topic>();
-        private readonly object _logLock = new();
-        
+        private readonly List<Topic> lista_topic = new();
+        private readonly SemaphoreSlim _logSemaphore = new(1, 1);
+        private readonly SemaphoreSlim _clientSemaphore = new(1, 1);
+        private readonly SemaphoreSlim _topicSemaphore = new(1, 1);
 
-        private readonly ConcurrentDictionary<string, List<string>> _temas = new ConcurrentDictionary<string, List<string>>();
+        private readonly ConcurrentDictionary<string, Cliente> _clientes = new();
+        private readonly ConcurrentDictionary<string, IServerStreamWriter<Message>> _clientStreams = new();
+        private readonly ConcurrentDictionary<string, IServerStreamWriter<Message>> _publidtreams = new();
+
         public MessageBrokerService(ILogger<MessageBrokerService> logger)
         {
             _logger = logger;
 
-            Topic topic1 = new Topic(12, "carro", "blanco");
-            Topic topic2 = new Topic(13, "cerdo", "blanco");
-            Topic topic3 = new Topic(14, "dinero", "blanco");
-            Topic topic4 = new Topic(15, "gatos", "blanco");
-
-            lista_topic.Add(topic1);
-            lista_topic.Add(topic2);
-            lista_topic.Add(topic3);
-            lista_topic.Add(topic4);
+            lista_topic.AddRange(new[]
+            {
+                new Topic(12, "futbol", "blanco"),
+                new Topic(13, "comida", "blanco"),
+                new Topic(14, "inversiones", "blanco"),
+                new Topic(15, "animales", "blanco"),
+                new Topic(16, "carros", "blanco")
+            });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private readonly ConcurrentDictionary<string, Cliente> _clientes = new ConcurrentDictionary<string, Cliente>();
-        private readonly ConcurrentDictionary<string, IServerStreamWriter<Message>> _clientStreams = new ConcurrentDictionary<string, IServerStreamWriter<Message>>();
-        private readonly ConcurrentDictionary<string, IServerStreamWriter<Message>> _publidtreams = new ConcurrentDictionary<string, IServerStreamWriter<Message>>();
-
-
-
-
 
         //-----------------------------------------------subcripcion------------------------------------------------------------------
 
         public override async Task Subcribirse_Cliente(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            
-            
-            
-            var cliente = new Cliente(request.Id, request.Nombre, request.Edad);
-            cliente.IngresarTopicsSubscritos(request.Topic);
-
-            
-
-
-
-             _clientes.TryAdd(request.Id, cliente);
-             _clientStreams.TryAdd(request.Id, responseStream);
-
+            await _clientSemaphore.WaitAsync();
+            try
+            {
+                if (_clientes.TryGetValue(request.Id, out var cliente))
+                {
+                    cliente.IngresarTopicsSubscritos(request.Topic);
+                    _clientStreams[request.Id] = responseStream;
+                }
+                else
+                {
+                    cliente = new Cliente(request.Id, request.Nombre, request.Edad);
+                    cliente.IngresarTopicsSubscritos(request.Topic);
+                    _clientes[request.Id] = cliente;
+                    _clientStreams[request.Id] = responseStream;
+                }
+            }
+            finally
+            {
+                _clientSemaphore.Release();
+            }
             await responseStream.WriteAsync(new Message { Content = "Tema " + request.Topic + " inscrito correctamente." });
-           // await EnviarMensajeACliente(request.Id, new Message { Content = "Cliente suscrito correctamente" });
-
         }
-
-
-
-
-
-      
 
         public override async Task Publish(PublishRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-
+            bool encontrado = false;
             bool iguales = false;
 
-            bool Encontrado = false;
             var tema = lista_topic.FirstOrDefault(t => t.Nombre == request.Topic);
-
-
-
-            if (_clientes.TryGetValue(request.IdPublish, out var cliente))
+            if (tema == null)
             {
-                Encontrado = true;
-                if (cliente.TopicsPublish.Contains(request.Topic))
-                {
-                    iguales = true;
-                }
+                await responseStream.WriteAsync(new Message { Content = "Tema no encontrado." });
+                return;
             }
 
-
-
-            if (tema != null && Encontrado && iguales)
+            await _clientSemaphore.WaitAsync();
+            try
             {
-                var messages = _topics.GetOrAdd(request.Topic, new List<string>());
-
-
-                foreach (var item in _clientes)
+                if (_clientes.TryGetValue(request.IdPublish, out var cliente))
                 {
-                    foreach(var message in item.Value.TopicsSubscritos)
+                    encontrado = true;
+                    if (cliente.TopicsPublish.Contains(request.Topic))
                     {
-                        if (message==tema.Nombre)
+                        iguales = true;
+                    }
+                }
+            }
+            finally
+            {
+                _clientSemaphore.Release();
+            }
+
+            if (encontrado && iguales)
+            {
+                await _topicSemaphore.WaitAsync();
+                try
+                {
+                    var messages = _topics.GetOrAdd(request.Topic, new List<string>());
+
+                    foreach (var item in _clientes)
+                    {
+                        if (item.Value.TopicsSubscritos.Contains(request.Topic))
                         {
-                            item.Value.IngresarTema(request.Message);
+                            item.Value.IngresarTema(request.Topic + " : " + request.Message);
                         }
                     }
                 }
+                finally
+                {
+                    _topicSemaphore.Release();
+                }
 
-
-
-
-
-
-
-
-
-
-                LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
-               
-               
-               
-
-             
-
+                await LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje publicado en el tema {request.Topic}");
                 await responseStream.WriteAsync(new Message { Content = "Mensaje enviado" });
-
-               
             }
             else
             {
-                await responseStream.WriteAsync(new Message { Content = "Aún no se ha subscrito como publisher." });
+                await responseStream.WriteAsync(new Message { Content = "Aún no se ha subscrito como productor." });
             }
-
         }
 
-
-
-
-
-        public override Task<Message> Subscribe_publisher(ClientRequest request, ServerCallContext context)
+        public override async Task<Message> Subscribe_publisher(ClientRequest request, ServerCallContext context)
         {
-
-
-
             var tema = lista_topic.FirstOrDefault(t => t.Nombre == request.Topic);
 
             if (tema != null)
             {
-                // Buscar el cliente en la lista de clientes suscritos
-                if (_clientes.TryGetValue(request.Id, out var cliente))
+                await _clientSemaphore.WaitAsync();
+                try
                 {
-                    // Verificar si el cliente ya est� suscrito al tema
-                    if (cliente.TopicsPublish.Contains(tema.Nombre))
+                    if (_clientes.TryGetValue(request.Id, out var cliente))
                     {
-                        return Task.FromResult(new Message
+                        if (cliente.TopicsPublish.Contains(tema.Nombre))
                         {
-                            Topic = tema.Nombre,
-                            Message_ = "YA SUSCRITO COMO PUBLISHER",
-                            Content = tema.Descripcion
-                        });
+                            return new Message
+                            {
+                                Topic = tema.Nombre,
+                                Message_ = "YA SUSCRITO COMO PUBLISHER",
+                                Content = tema.Descripcion
+                            };
+                        }
+                        else
+                        {
+                            cliente.IngresarTopicsPublish(tema.Nombre);
+                            return new Message
+                            {
+                                Topic = tema.Nombre,
+                                Message_ = "PUBLISHER REGISTRADO",
+                                Content = tema.Descripcion
+                            };
+                        }
                     }
                     else
                     {
-                        // Agregar el tema a la lista de temas suscritos del cliente
+                        cliente = new Cliente(request.Id, request.Nombre, request.Edad);
                         cliente.IngresarTopicsPublish(tema.Nombre);
+                        _clientes[request.Id] = cliente;
 
-                        Console.WriteLine($"Cliente actualizado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
-
-                        return Task.FromResult(new Message
+                        return new Message
                         {
                             Topic = tema.Nombre,
                             Message_ = "PUBLISHER REGISTRADO",
                             Content = tema.Descripcion
-                        });
+                        };
                     }
                 }
-                else
+                finally
                 {
-                    // Crear un nuevo cliente y registrar el tema al que se suscribe
-                    cliente = new Cliente(request.Id, request.Nombre, request.Edad);
-                    cliente.IngresarTopicsPublish(tema.Nombre);
-
-
-                    _clientes.TryAdd(request.Id, cliente);
-
-                    Console.WriteLine($"Nuevo cliente agregado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsPublish)}");
-
-                    return Task.FromResult(new Message
-                    {
-                        Topic = tema.Nombre,
-                        Message_ = "PUBLISHER REGISTRADO",
-                        Content = tema.Descripcion
-                    });
+                    _clientSemaphore.Release();
                 }
             }
             else
             {
-                // Retornar un mensaje vac�o indicando que el tema no fue encontrado
-                return Task.FromResult(new Message
+                return new Message
                 {
                     Topic = string.Empty,
                     Message_ = "TEMA NO ENCONTRADO",
                     Content = string.Empty
-                });
+                };
             }
-
-
-
         }
 
-
-
-
-
-        public override Task<TopicList> listar_mensajes(ClientRequest request, ServerCallContext context)
+        public override async Task<TopicList> listar_mensajes(ClientRequest request, ServerCallContext context)
         {
             var reply = new TopicList();
             var p = new List<string>();
 
-            if (_clientStreams.TryGetValue(request.Id, out var clientStreamWriter))
+            await _clientSemaphore.WaitAsync();
+            try
             {
-                
-
-                var clien = _clientes.FirstOrDefault(t => t.Value.Id == request.Id);
-                var cola = clien.Value.ObtenerColaDeTemas();
-
-                if (cola != null)
+                if (_clientes.TryGetValue(request.Id, out var cliente))
                 {
-                    foreach (var pi in cola)
+                    var cola = cliente.ObtenerColaDeTemas();
+
+                    if (cola != null)
                     {
-                      p.Add(pi.ToString());
+                        p.AddRange(cola);
                     }
+                    else
+                    {
+                        p.Add("No hay mensajes");
+                    }
+
+                    reply.Topics.AddRange(p);
+                    await LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Lista de temas enviada al cliente");
+                    return reply;
                 }
                 else
                 {
                     p.Add("No hay mensajes");
-                   
+                    reply.Topics.AddRange(p);
+                    return reply;
                 }
-
-                
-
-                reply.Topics.AddRange(p);
-                LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Lista de temas enviada al cliente");
-                return Task.FromResult(reply);
             }
-            else
+            finally
             {
-
-                p.Add("No hay mensajes");
-                reply.Topics.AddRange(p);
-                return Task.FromResult(reply);
+                _clientSemaphore.Release();
             }
-
         }
-
-
-
 
         public override async Task Enviar(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            // Verifica si el cliente est� en el diccionario
-            if (_clientStreams.TryGetValue(request.Id, out var clientStreamWriter))
+            await _clientSemaphore.WaitAsync();
+            try
             {
-                var clien = _clientes.FirstOrDefault(t => t.Value.Id == request.Id);
-
-                var cola = clien.Value.ObtenerColaDeTemas();
-
-
-                if (cola != null)
+                if (_clientStreams.TryGetValue(request.Id, out var clientStreamWriter))
                 {
-                    foreach (var p in cola)
+                    var clien = _clientes.FirstOrDefault(t => t.Value.Id == request.Id);
+                    var cola = clien.Value.ObtenerColaDeTemas();
+
+                    if (cola != null)
                     {
-                        await clientStreamWriter.WriteAsync(new Message { Content = p });
+                        foreach (var p in cola)
+                        {
+                            await clientStreamWriter.WriteAsync(new Message { Content = p });
+                        }
+                    }
+                    else
+                    {
+                        await clientStreamWriter.WriteAsync(new Message { Content = "no hay mensajes" });
                     }
                 }
                 else
                 {
-                    // Env�a el mensaje al cliente
-                    await clientStreamWriter.WriteAsync(new Message { Content = "no hay mensajes" });
+                    Console.WriteLine($"El cliente con ID {request.Id} no está conectado.");
+                    await responseStream.WriteAsync(new Message { Content = "no hay mensajes" });
                 }
-
-
             }
-            else
+            finally
             {
-                // El cliente no est� conectado o no existe
-                Console.WriteLine($"El cliente con ID {request.Id} no est� conectado.");
-                if (clientStreamWriter != null)
-                {
-                    await clientStreamWriter.WriteAsync(new Message { Content = "no hay mensajes" });
-                }
-                else
-                {
-                    // Manejar el caso en el que clientStreamWriter es null
-                    Console.WriteLine("Error: clientStreamWriter es null.");
-                }
+                _clientSemaphore.Release();
             }
         }
-
-
-
-
 
         public override async Task SubscribeToTopic(ClientRequest request, IServerStreamWriter<Message> responseStream, ServerCallContext context)
         {
-            // Aqu� puedes implementar la l�gica para enviar mensajes continuamente al cliente
-
-            // Supongamos que generamos un mensaje de ejemplo
             var message = new Message { Content = request.Topic };
-
-            // Enviamos el mensaje al cliente
             await responseStream.WriteAsync(message);
-
-            // Simulamos un intervalo de tiempo entre mensajes
-            await Task.Delay(1000); // Espera 1 segundo antes de enviar el pr�ximo mensaje
-
+            await Task.Delay(1000);
         }
 
-
-
-
-
-
-
-        //--------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-        public override Task<TopicList> GetTopics(Empty request, ServerCallContext context)
+        public override async Task<TopicList> GetTopics(Empty request, ServerCallContext context)
         {
-
-
-            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Lista de temas enviada al cliente");
+            await LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Lista de temas enviada al cliente");
 
             var reply = new TopicList();
             var p = new List<string>();
 
-            foreach (var tema in lista_topic)
+            await _topicSemaphore.WaitAsync();
+            try
             {
-                p.Add(tema.Nombre);
+                p.AddRange(lista_topic.Select(tema => tema.Nombre));
+            }
+            finally
+            {
+                _topicSemaphore.Release();
             }
 
             reply.Topics.AddRange(p);
-
-            return Task.FromResult(reply);
+            return reply;
         }
 
-
-
-
-
-
-
-        /*
-        public override Task<Message> Subcribirse_Cliente(ClientRequest request, ServerCallContext context)
+        private async Task LogEvent(string logMessage)
         {
-          
-
-            // Buscar el tema solicitado en la lista de temas
-            var tema = lista_topic.FirstOrDefault(t => t.Nombre == request.Topic);
-
-            if (tema != null)
+            await _logSemaphore.WaitAsync();
+            try
             {
-                // Buscar el cliente en la lista de clientes suscritos
-                if (listaClientes.TryGetValue(request.Id, out var cliente))
-                {
-                    // Verificar si el cliente ya est� suscrito al tema
-                    if (cliente.TopicsSubscritos.Contains(tema.Nombre))
-                    {
-                        return Task.FromResult(new Message
-                        {
-                            Topic = tema.Nombre,
-                            Message_ = "YA SUSCRITO",
-                            Content = tema.Descripcion
-                        });
-                    }
-                    else
-                    {
-                        // Agregar el tema a la lista de temas suscritos del cliente
-                        cliente.IngresarTopicsSubscritos(tema.Nombre);
-
-                        Console.WriteLine($"Cliente actualizado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
-
-                        return Task.FromResult(new Message
-                        {
-                            Topic = tema.Nombre,
-                            Message_ = "REGISTRADO",
-                            Content = tema.Descripcion
-                        });
-                    }
-                }
-                else
-                {
-                    // Crear un nuevo cliente y registrar el tema al que se suscribe
-                    cliente = new Cliente(request.Id, request.Nombre, request.Edad);
-                    cliente.IngresarTopicsSubscritos(tema.Nombre);
-                    listaClientes.TryAdd(request.Id, cliente);
-
-
-
-                    
-
-
-                    Console.WriteLine($"Nuevo cliente agregado: {cliente.Nombre}, Topics: {string.Join(", ", cliente.TopicsSubscritos)}");
-
-                    return Task.FromResult(new Message
-                    {
-                        Topic = tema.Nombre,
-                        Message_ = "REGISTRADO",
-                        Content = tema.Descripcion
-                    });
-                }
+                await File.AppendAllTextAsync("log.txt", logMessage + Environment.NewLine);
             }
-            else
+            finally
             {
-                // Retornar un mensaje vac�o indicando que el tema no fue encontrado
-                return Task.FromResult(new Message
-                {
-                    Topic = string.Empty,
-                    Message_ = "TEMA NO ENCONTRADO",
-                    Content = string.Empty
-                });
+                _logSemaphore.Release();
             }
         }
-
-
-        public override async Task Subscribe_prueba(ClientRequest request, IServerStreamWriter<ClientRequest> responseStream, ServerCallContext context)
-        {
-            _clientStreams.TryAdd(request.Id, responseStream);
-
-        }
-
-
-
-        */
-
-
-        //-----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-        private async Task NotifySubscribers(string topic, string message)
-        {
-            foreach (var cliente in listaClientes.Values)
-            {
-                if (cliente.TopicsSubscritos.Contains(topic))
-                {
-                    // Verificar si el cliente tiene un flujo de respuesta asociado
-                    if (listaClientes.TryGetValue(cliente.Id, out var clientStream))
-                    {
-                        try
-                        {
-                            // Crear el mensaje con el contenido y enviarlo al cliente
-                            var msg = new Message { Topic = topic, Content = message };
-                          
-
-                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Mensaje enviado al cliente {cliente.Nombre} suscrito al tema {topic}");
-                        }
-                        catch (Exception ex)
-                        {
-                            LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} Error enviando mensaje al cliente {cliente.Nombre} suscrito al tema {topic}: {ex.Message}");
-                        }
-                    }
-                    else
-                    {
-                        LogEvent($"{DateTime.Now:dd/MM/yyyy:HH:mm:ss} El cliente {cliente.Nombre} suscrito al tema {topic} no tiene un flujo de respuesta asociado.");
-                    }
-                }
-            }
-        }
-
-
-
-
-
-
-
-        //------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void LogEvent(string logMessage)
-        {
-            lock (_logLock)
-            {
-                File.AppendAllText("log.txt", logMessage + Environment.NewLine);
-            }
-        }
-
-
-
-      
-
     }
 }
