@@ -147,15 +147,10 @@ namespace GrpcServiceMessage.Services
             }
             else
             {
-
+                await responseStream.WriteAsync(new Message { Content = "ERROR NO SE ENCUENTRA SUBCRITO COMO PUBLISHER" });
             }
 
         }
-
-
-
-
-
 
 
 
@@ -231,6 +226,7 @@ namespace GrpcServiceMessage.Services
 
 
         }
+
 
 
 
