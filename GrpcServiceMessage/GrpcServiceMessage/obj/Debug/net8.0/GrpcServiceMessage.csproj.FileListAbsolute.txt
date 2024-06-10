@@ -1,37 +1,107 @@
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.csproj.AssemblyReference.cache
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.AssemblyInfoInputs.cache
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.AssemblyInfo.cs
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.csproj.CoreCompileInputs.cache
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\appsettings.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\GrpcServiceMessage.exe
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\GrpcServiceMessage.deps.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\GrpcServiceMessage.runtimeconfig.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\GrpcServiceMessage.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\GrpcServiceMessage.pdb
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Google.Protobuf.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Grpc.AspNetCore.Server.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Grpc.AspNetCore.Server.ClientFactory.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Grpc.Core.Api.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Grpc.Net.Client.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Grpc.Net.ClientFactory.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\Grpc.Net.Common.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets.build.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets\msbuild.GrpcServiceMessage.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets\msbuild.build.GrpcServiceMessage.props
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.GrpcServiceMessage.props
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.GrpcServiceMessage.props
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\scopedcss\bundle\GrpcServiceMessage.styles.css
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.csproj.CopyComplete
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\refint\GrpcServiceMessage.dll
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.pdb
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\GrpcServiceMessage.genruntimeconfig.cache
-C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\Plantillas personalizadas de Office\GrpcServiceMessage\GrpcServiceMessage\obj\Debug\net8.0\ref\GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.AssemblyReference.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.AssemblyInfoInputs.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.AssemblyInfo.cs
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.CoreCompileInputs.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/appsettings.Development.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/appsettings.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.exe
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.deps.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.runtimeconfig.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.pdb
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Google.Protobuf.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.AspNetCore.Server.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Core.Api.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.Client.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.ClientFactory.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.Common.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.build.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.development.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.GrpcServiceMessage.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.build.GrpcServiceMessage.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.GrpcServiceMessage.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.GrpcServiceMessage.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.pack.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/scopedcss/bundle/GrpcServiceMessage.styles.css
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.CopyComplete
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/refint/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.pdb
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.genruntimeconfig.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/Plantillas personalizadas de Office/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/ref/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/appsettings.Development.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/appsettings.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.exe
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.deps.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.runtimeconfig.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.pdb
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Google.Protobuf.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.AspNetCore.Server.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Core.Api.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.Client.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.ClientFactory.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.Common.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.AssemblyReference.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.AssemblyInfoInputs.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.AssemblyInfo.cs
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.CoreCompileInputs.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.sourcelink.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.build.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.development.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.GrpcServiceMessage.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.build.GrpcServiceMessage.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.GrpcServiceMessage.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.GrpcServiceMessage.props
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.pack.json
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/scopedcss/bundle/GrpcServiceMessage.styles.css
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.CopyComplete
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/refint/GrpcServiceMessage.dll
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.pdb
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.genruntimeconfig.cache
+C:/Users/alexb/OneDrive/almacenamiento antes de reseteo/Documentos/GRPC/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/ref/GrpcServiceMessage.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/appsettings.Development.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/appsettings.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.deps.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.runtimeconfig.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/GrpcServiceMessage.pdb
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Google.Protobuf.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.AspNetCore.Server.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Core.Api.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.Client.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.ClientFactory.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/bin/Debug/net8.0/Grpc.Net.Common.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.AssemblyReference.cache
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.AssemblyInfoInputs.cache
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.AssemblyInfo.cs
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.csproj.CoreCompileInputs.cache
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.MvcApplicationPartsAssemblyInfo.cache
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.sourcelink.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.build.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.development.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.GrpcServiceMessage.Microsoft.AspNetCore.StaticWebAssets.props
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.build.GrpcServiceMessage.props
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.GrpcServiceMessage.props
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.GrpcServiceMessage.props
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/staticwebassets.pack.json
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/scopedcss/bundle/GrpcServiceMessage.styles.css
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServ.2E2CD502.Up2Date
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/refint/GrpcServiceMessage.dll
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.pdb
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/GrpcServiceMessage.genruntimeconfig.cache
+/mnt/c/Users/leoch/Desktop/Proyecto-II-SO/GrpcServiceMessage/GrpcServiceMessage/obj/Debug/net8.0/ref/GrpcServiceMessage.dll
 C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\GRPC\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\GRPC\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\appsettings.json
 C:\Users\alexb\OneDrive\almacenamiento antes de reseteo\Documentos\GRPC\GrpcServiceMessage\GrpcServiceMessage\bin\Debug\net8.0\GrpcServiceMessage.exe

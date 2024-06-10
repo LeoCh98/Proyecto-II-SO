@@ -3,16 +3,29 @@ syntax = "proto3";
 option csharp_namespace = "GrpcServiceMessage";
 
 service MessageBroker {
-    rpc Publish(PublishRequest) returns (PublishReply);
-    rpc Subscribe(ClientRequest) returns ( Message);
+
+
+    rpc Publish(PublishRequest) returns (stream Message);
+
     rpc GetTopics (Empty) returns (TopicList);
     rpc Subscribe_publisher (ClientRequest) returns (Message);
+    rpc SubscribeToTopic(ClientRequest) returns (stream Message);
+
+
+    rpc Enviar (ClientRequest) returns (stream Message);
+
+    rpc Subcribirse_Cliente (ClientRequest) returns (stream Message);
+
+    rpc Subscribe_prueba(ClientRequest) returns (stream ClientRequest);
+
+    rpc listar_mensajes(ClientRequest) returns(TopicList);
+
 }
 
 message PublishRequest {
     string topic = 1;
     string message = 2;
-    string idPublish= 3;
+    string idPublish = 3;
 }
 
 message PublishReply {
@@ -28,19 +41,23 @@ message Message {
     string message = 2;
     string content = 3;
 }
+
 message Empty {}
 
 message TopicList {
     repeated string topics = 1;
 }
 
+message ClientRequest {
+    string Id = 1;
+    string Nombre = 2;
+    int32 Edad = 3;
+    string suscritor = 4;
+    string suscritorPublish = 5;
+    string Topic = 6;
+}
 
-message ClientRequest{
-
-        string Id = 1;
-        string Nombre = 2;
-        int32  Edad = 3;
-        string suscritor=4;
-        string suscritorPublish=5;
-        string Topic=6;
+message Respuesta{
+    string tema = 1;
+    string mensaje = 2;
 }

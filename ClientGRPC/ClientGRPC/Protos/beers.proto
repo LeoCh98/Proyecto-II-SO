@@ -3,10 +3,13 @@
 option csharp_namespace = "ClientGRPC";
 
 service MessageBroker {
-    rpc Publish(PublishRequest) returns (PublishReply);
-    rpc Subscribe(ClientRequest) returns (ClientRequest); // Cambié Message a ClientRequest
+    rpc Publish(PublishRequest) returns ( Message);
     rpc GetTopics (Empty) returns (TopicList);
     rpc Subscribe_publisher (ClientRequest) returns (Message);
+    rpc SubscribeToTopic(ClientRequest) returns (stream Message);
+    rpc Subcribirse_Cliente (ClientRequest) returns (Message);
+    rpc Enviar (ClientRequest) returns ( stream Message);
+    rpc listar_mensajes(ClientRequest) returns(TopicList);
 }
 
 message PublishRequest {

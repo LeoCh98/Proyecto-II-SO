@@ -58,6 +58,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.64.0, )"
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

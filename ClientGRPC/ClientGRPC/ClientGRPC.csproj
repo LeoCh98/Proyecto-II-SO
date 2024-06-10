@@ -10,6 +10,7 @@
 
 
   <ItemGroup>
+	 <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 	 <Protobuf Include="Protos\beers.proto" GrpcServicea="Client" />
     <PackageReference Include="Google.Protobuf" Version="3.27.0" />
     <PackageReference Include="Grpc.Net.Client" Version="2.63.0" />

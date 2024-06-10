@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GrpcServiceMessage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bafffea6ecb12ade81051c4fb31e7e6a70ffad4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78845806ef50e5124b4673c3a8a844dafadfde74")]
 [assembly: System.Reflection.AssemblyProductAttribute("GrpcServiceMessage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GrpcServiceMessage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

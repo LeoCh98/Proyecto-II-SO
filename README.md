@@ -9,6 +9,14 @@ consumen.
 ## Requerimientos
     - .NET Core versión 8.0.301 (Lastest)
     - WSL version: 2.1.5.0 o superior.
+    -visual studio 2022 ultima version Microsoft Visual Studio Community 2022 (64 bits) - Current
+    Versión 17.8.6(Lastest)
+
+## Compilación del Proyecto desde visual studio 2022
+    - tener la  ultima version de visual studio 2022
+    - se encuentran dos proyectos uno service y otro client abrir los dos en visual studio y ejecutarlo con el boton superior verde
+    -cabe aclarar que el service y el client se encuentra escuchando en el puerto 5238 y localhost by defoult. 
+
 
 ## Compilación del Proyecto desde VsCode
     - En la barra de menú, selecciona `Terminal` y luego `Nueva Terminal` para abrir una nueva terminal.
